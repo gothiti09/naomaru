@@ -5,6 +5,7 @@ namespace App\Http\Requests;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Validation\Rule;
+use Illuminate\Validation\Rules\Password;
 
 class UserRequest extends FormRequest
 {
@@ -29,7 +30,11 @@ class UserRequest extends FormRequest
             $this->user = Auth::id();
         }
         return [
-            'email' => ['required', 'email', Rule::unique('users')->whereNull('deleted_at')->ignore($this->user)]
+            'company.corporate_number' => ['required', 'integer', 'digits_between:13,15'],
+            'login_id' => ['required', 'string', 'min:6', 'max:255', Rule::unique('users')->whereNull('deleted_at')->ignore($this->user)],
+            'name' => ['required', 'string', 'max:255'],
+            'email' => ['required', 'string', 'email', 'max:255', Rule::unique('users')->whereNull('deleted_at')->ignore($this->user)],
+            'password' => ['nullable', 'confirmed', Password::defaults()],
         ];
     }
 
@@ -42,6 +47,14 @@ class UserRequest extends FormRequest
     {
         return [
             'email.unique' => 'すでに利用されているメールアドレスのため利用できません。',
+        ];
+    }
+
+    public function attributes()
+    {
+        return [
+            'company.corporate_number' => '法人番号',
+            'login_id' => 'ログインID',
         ];
     }
 }

@@ -16,17 +16,23 @@ class CreateAll extends Migration
         Schema::create('users', function (Blueprint $table) {
             $table->id();
             $table->uuid('uuid')->unique();
+            $table->char('prefecture_code', 2)->nullable();
             $table->unsignedBigInteger('company_id');
-            $table->unsignedBigInteger('audit_level_id');
+            $table->unsignedBigInteger('audit_level_id')->nullable();
             $table->string('email');
             $table->string('login_id');
             $table->string('name')->nullable();
+            $table->string('team_name')->nullable();
             $table->string('kana')->nullable();
             $table->string('age_range')->nullable();
             $table->string('tel')->nullable();
             // https://qiita.com/aoshirobo/items/32deb45cb8c8b87d65a4#%E7%B5%90%E8%AB%96
             $table->string('sex')->default(0)->comment('Not known:0,Male:1,Female:2,Not applicable:9');
             $table->timestamp('email_verified_at')->nullable();
+            $table->timestamp('finish_onboarding_at')->nullable();
+            $table->text('description')->nullable();
+            $table->string('url')->nullable();
+            $table->boolean('is_buyer')->default(true);
             $table->string('password');
             $table->rememberToken();
             $this->addCommonColumn($table);
@@ -44,14 +50,9 @@ class CreateAll extends Migration
         Schema::create('companies', function (Blueprint $table) {
             $table->id();
             $table->uuid('uuid')->unique();
-            $table->char('prefecture_code', 2)->nullable();
             $table->string('corporate_number')->unique()->comment('法人番号');
             $table->string('name')->nullable();
-            $table->string('url')->nullable();
-            $table->text('description')->nullable();
-            $table->boolean('is_buyer')->nullable();
             $this->addCommonColumn($table);
-            $table->foreign('prefecture_code')->references('code')->on('prefectures');
         });
 
         Schema::create('audit_levels', function (Blueprint $table) {
@@ -63,6 +64,7 @@ class CreateAll extends Migration
         Schema::table('users', function (Blueprint $table) {
             $table->foreign('company_id')->references('id')->on('companies');
             $table->foreign('audit_level_id')->references('id')->on('audit_levels');
+            $table->foreign('prefecture_code')->references('code')->on('prefectures');
         });
 
         Schema::create('password_resets', function (Blueprint $table) {
@@ -71,7 +73,7 @@ class CreateAll extends Migration
             $this->addCommonColumn($table, false);
         });
 
-        Schema::create('requests', function (Blueprint $table) {
+        Schema::create('projects', function (Blueprint $table) {
             $table->id();
             $table->uuid('uuid')->unique();
             $table->unsignedBigInteger('company_id');
@@ -79,9 +81,9 @@ class CreateAll extends Migration
             $table->string('title');
             $table->text('description');
             $table->string('status')->index();
-            $table->dateTime('request_start_at');
-            $table->dateTime('request_end_at');
-            $table->dateTime('deesired_delivery_at');
+            $table->dateTime('open_at');
+            $table->dateTime('close_at');
+            $table->dateTime('desired_delivery_at');
             $table->dateTime('cancel_at')->nullable();
             $table->string('cancel_reason')->nullable();
             $table->integer('min_budget')->nullable();
@@ -96,7 +98,7 @@ class CreateAll extends Migration
         Schema::create('proposals', function (Blueprint $table) {
             $table->id();
             $table->uuid('uuid')->unique();
-            $table->unsignedBigInteger('request_id');
+            $table->unsignedBigInteger('project_id');
             $table->unsignedBigInteger('company_id');
             $table->text('description');
             $table->dateTime('proposal_at');
@@ -107,7 +109,7 @@ class CreateAll extends Migration
             $table->integer('budget')->nullable();
             $table->boolean('open')->default(true);
             $this->addCommonColumn($table);
-            $table->foreign('request_id')->references('id')->on('requests');
+            $table->foreign('project_id')->references('id')->on('projects');
             $table->foreign('company_id')->references('id')->on('companies');
         });
 
@@ -150,13 +152,13 @@ class CreateAll extends Migration
             $table->foreign('audit_item_id')->references('id')->on('audit_items');
         });
 
-        Schema::create('request_files', function (Blueprint $table) {
+        Schema::create('project_files', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('request_id');
+            $table->unsignedBigInteger('project_id');
             $table->string('name');
             $table->string('path');
             $this->addCommonColumn($table);
-            $table->foreign('request_id')->references('id')->on('requests');
+            $table->foreign('project_id')->references('id')->on('projects');
         });
 
         Schema::create('proposal_files', function (Blueprint $table) {
@@ -168,21 +170,21 @@ class CreateAll extends Migration
             $table->foreign('proposal_id')->references('id')->on('proposals');
         });
 
-        Schema::create('request_stages', function (Blueprint $table) {
+        Schema::create('project_stages', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('request_id');
+            $table->unsignedBigInteger('project_id');
             $table->unsignedBigInteger('staege_id');
             $this->addCommonColumn($table);
-            $table->foreign('request_id')->references('id')->on('requests');
+            $table->foreign('project_id')->references('id')->on('projects');
             $table->foreign('staege_id')->references('id')->on('stages');
         });
 
-        Schema::create('request_methods', function (Blueprint $table) {
+        Schema::create('project_methods', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('request_id');
+            $table->unsignedBigInteger('project_id');
             $table->unsignedBigInteger('method_id');
             $this->addCommonColumn($table);
-            $table->foreign('request_id')->references('id')->on('requests');
+            $table->foreign('project_id')->references('id')->on('projects');
             $table->foreign('method_id')->references('id')->on('methods');
         });
     }

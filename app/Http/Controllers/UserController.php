@@ -2,7 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\UserRequest;
+use App\Models\Company;
+use App\Models\Prefecture;
 use App\Models\User;
+use Illuminate\Support\Facades\Hash;
 use Illuminate\Http\Request;
 
 class UserController extends Controller
@@ -57,7 +61,9 @@ class UserController extends Controller
      */
     public function edit(User $user)
     {
-        //
+        $company = $user->company;
+        $prefectures = Prefecture::get();
+        return view('pages.user.create-edit', compact('user', 'company', 'prefectures'));
     }
 
     /**
@@ -67,9 +73,27 @@ class UserController extends Controller
      * @param  \App\Models\User  $user
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, User $user)
+    public function update(UserRequest $request, User $user)
     {
-        //
+        $update = $request->password ? ['password' => Hash::make($request->password)] : [];
+        $update = $user->finish_onboarding_at ? $update : $update + ['finish_onboarding_at' => now()];
+        $user->fill($request->only([
+            'login_id',
+            'team_name',
+            'prefecture_code',
+            'description',
+            'email',
+            'name',
+            'kana',
+            'tel',
+            'sex',
+            'age_range',
+        ]) + $update)->save();
+        $user->company->fill([
+            'corporate_number' => $request->company['corporate_number'],
+            'name' => $request->company['name'],
+        ])->save();
+        return redirect('/')->with('success', '更新しました');
     }
 
     /**

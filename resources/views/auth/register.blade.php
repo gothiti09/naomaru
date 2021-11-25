@@ -12,9 +12,25 @@
         <form method="POST" action="{{ route('register') }}">
             @csrf
 
-            <!-- Name -->
+            <!-- 法人番号 -->
             <div>
-                <x-atoms.label for="name" :value="__('Name')" />
+                <x-atoms.label for="corporate_number" value="法人番号" />
+
+                <x-atoms.input id="corporate_number" class="block mt-1 w-full" type="text" name="corporate_number" :value="old('corporate_number')" required
+                    autofocus />
+            </div>
+
+            <!-- ログインID -->
+            <div class="mt-4">
+                <x-atoms.label for="login_id" value="ログインID" />
+
+                <x-atoms.input id="login_id" class="block mt-1 w-full" type="text" name="login_id" :value="old('login_id')" required
+                    autofocus />
+            </div>
+
+            <!-- Name -->
+            <div class="mt-4">
+                <x-atoms.label for="name" value="担当者指名" />
 
                 <x-atoms.input id="name" class="block mt-1 w-full" type="text" name="name" :value="old('name')" required
                     autofocus />

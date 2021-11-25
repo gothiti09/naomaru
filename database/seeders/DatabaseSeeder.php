@@ -143,5 +143,29 @@ class DatabaseSeeder extends Seeder
             ['code' => '46', 'region_id' => 10, 'name' => '鹿児島県'],
             ['code' => '47', 'region_id' => 10, 'name' => '沖縄県'],
         ]);
+
+        DB::table('companies')->insert(
+            [
+                ['name' => '株式会社AAA', 'uuid' => Str::uuid(), 'corporate_number' => '1234567890123'],
+            ]
+        );
+
+        DB::table('users')->insert(
+            [
+                [
+                    'id' => '4',
+                    'login_id' => 'test12',
+                    'uuid' => Str::uuid(),
+                    'company_id' => '1',
+                    'name' => '山田　太郎',
+                    'email' => 'user@example.com',
+                    'password' => bcrypt('Test1234'),
+                    'email_verified_at' => now(),
+                    'kana' => 'ヤマダ　タロウ',
+                    'sex' => '1',
+                    'finish_onboarding_at' => now(),
+                ],
+            ]
+        );
     }
 }

@@ -3,7 +3,7 @@
 namespace App\Console\Commands;
 
 use App\Consts\MainConst;
-use App\Models\Family;
+use App\Models\Company;
 use App\Models\Payout;
 use App\Models\Payment;
 use App\Models\User;
@@ -69,7 +69,7 @@ class SendScheduleFix extends Command
         // $visitationBycompanies = Visitation::select('company_id')->whereIn('status', [Visitation::STATUS_BEFORE_NOTIFICATION, Visitation::STATUS_TO_BE_SCHEDULED])->groupBy('company_id')->with(['family','family.users' => function($query){
         //     $query->whereIn('role', ['non_resident_parent', 'non_resident_agent']);
         // }])->get();
-        $companies = Family::with(
+        $companies = Company::with(
             [
                 'users' => function ($query) {
                     $query->whereIn('role', ['non_resident_parent', 'non_resident_agent']);

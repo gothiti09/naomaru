@@ -1,6 +1,6 @@
 @extends('layouts.app')
 @php
-use App\Models\Family;
+use App\Models\Company;
 const MEDIATION_CONDITION_PLACEHOLDER = <<<EOT
 ・子の福祉を考慮して自宅以外とする
 ・月1回、毎月第1土曜日の11～17時までとする
@@ -33,13 +33,14 @@ EOT;
                     </x-molecules.dd-dt> --}}
                     <x-molecules.dd-dt label="両親の呼び方" required=true>
                         <x-atoms.radio name="parent_label" :option="[
-                            Family::PARENT_LABEL_DOUKYOOYA => '同居親、別居親と呼ぶ',
-                            Family::PARENT_LABEL_HAHAOYA => '同居親を母親、別居親を父親と呼ぶ',
-                            Family::PARENT_LABEL_TITIOYA => '同居親を父親、別居親を母親と呼ぶ']"
+                                Company::PARENT_LABEL_DOUKYOOYA => '同居親、別居親と呼ぶ',
+                                Company::PARENT_LABEL_HAHAOYA => '同居親を母親、別居親を父親と呼ぶ',
+                                Company::PARENT_LABEL_TITIOYA => '同居親を父親、別居親を母親と呼ぶ']"
                             checked="{{ $family->parent_label }}" required=true />
                         <p class="text-gray-500 text-xs">らえるでは名前は表示せず、こちらで指定した呼び方を利用します。</p>
                     </x-molecules.dd-dt>
-                    <x-molecules.dd-dt label="調停条件" x-data="{ isOpen: {{ $family->no_mediation_condition ? 'false' : 'true' }} }">
+                    <x-molecules.dd-dt label="調停条件"
+                        x-data="{ isOpen: {{ $family->no_mediation_condition ? 'false' : 'true' }} }">
                         <x-atoms.checkbox name="no_mediation_condition" label="調停条件なし"
                             checked="{{ $family->no_mediation_condition }}" @click="isOpen = !isOpen" />
                         <x-atoms.textarea name="mediation_condition" :value="$family->mediation_condition" x-show="isOpen"

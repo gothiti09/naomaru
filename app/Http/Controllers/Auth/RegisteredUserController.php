@@ -3,8 +3,8 @@
 namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
-use App\Models\Family;
-use App\Models\InvitedFamily;
+use App\Models\Company;
+use App\Models\InvitedCompany;
 use App\Models\User;
 use App\Providers\RouteServiceProvider;
 use Illuminate\Auth\Events\Registered;
@@ -36,28 +36,23 @@ class RegisteredUserController extends Controller
     public function store(Request $request)
     {
         $request->validate([
+            'corporate_number' => ['required', 'integer','digits_between:13,15'],
+            'login_id' => ['required', 'string','min:6', 'max:255', 'unique:users'],
             'name' => ['required', 'string', 'max:255'],
             'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
             'password' => ['required', 'confirmed', Rules\Password::defaults()],
+        ], [], [
+            'corporate_number' => '法人番号',
+            'login_id' => 'ログインID',
         ]);
 
-        $company_id = $request->invited_id ?
-            InvitedFamily::whereInviteId($request->invited_id)->first()->company_id :
-            Family::create()->id;
-        //TODO invitedfamilyをDELETE
-        $role = $request->company_id ? User::ROLE_NON_RESIDENT_PARENT : User::ROLE_RESIDENT_PARENT;
+        $company = Company::firstOrCreate(['corporate_number' => $request->corporate_number]);
         $user = User::create([
-            'company_id' => $company_id,
-            'role' => $role,
+            'company_id' => $company->id,
             'name' => $request->name,
+            'login_id' => $request->login_id,
             'email' => $request->email,
             'password' => Hash::make($request->password),
-            'alert_schedule' => true,
-            'alert_action' => true,
-            'alert_report' => true,
-            'alert_message' => true,
-            'read_report' => true,
-            'read_message' => true,
         ]);
 
         event(new Registered($user));
