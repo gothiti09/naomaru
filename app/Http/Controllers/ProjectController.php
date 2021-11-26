@@ -17,7 +17,8 @@ class ProjectController extends Controller
      */
     public function index()
     {
-        //
+        $projects = Project::get();
+        return view('pages.project.index', compact('projects'));
     }
 
     /**
@@ -31,7 +32,7 @@ class ProjectController extends Controller
         $prefectures = Prefecture::get();
         $stages = Stage::get();
         $methods = Method::get();
-        return view('pages.project.create-edit', compact('project','prefectures','stages', 'methods'));
+        return view('pages.project.create-edit', compact('project', 'prefectures', 'stages', 'methods'));
     }
 
     /**
@@ -54,7 +55,7 @@ class ProjectController extends Controller
      */
     public function show(Project $project)
     {
-        //
+        return view('pages.project.show', compact('project'));
     }
 
     /**
@@ -65,7 +66,10 @@ class ProjectController extends Controller
      */
     public function edit(Project $project)
     {
-        //
+        $prefectures = Prefecture::get();
+        $stages = Stage::get();
+        $methods = Method::get();
+        return view('pages.project.create-edit', compact('project', 'prefectures', 'stages', 'methods'));
     }
 
     /**

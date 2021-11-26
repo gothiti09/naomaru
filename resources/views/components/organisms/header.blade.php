@@ -35,12 +35,8 @@
                     x-transition:leave-end="transform opacity-0 scale-95"
                     class="origin-top-right absolute right-0 mt-2 w-48 rounded-md shadow-lg py-1 bg-white ring-1 ring-black ring-opacity-5 focus:outline-none"
                     role="menu" aria-orientation="vertical" aria-labelledby="user-menu-button" tabindex="-1">
-                    <!-- Active: "bg-gray-100", Not Active: "" -->
-                    <a href="/setting-visitation" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
-                        role="menuitem" tabindex="-1" id="user-menu-item-0">面会交流設定</a>
-                    <a href="/message" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100" role="menuitem"
-                        tabindex="-1" id="user-menu-item-0">緊急連絡</a>
-
+                    <a href="{{route('user.edit', Auth::user()->uuid)}}" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100" role="menuitem"
+                        tabindex="-1" id="user-menu-item-0">アカウント設定</a>
                     <form method="POST" action="{{ route('logout') }}">
                         @csrf
                         <a href="#" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100" role="menuitem"

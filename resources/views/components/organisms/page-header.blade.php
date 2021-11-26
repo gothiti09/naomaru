@@ -1,4 +1,4 @@
-@props(['title', 'search' => false, 'create' => false, 'keyword' => ''])
+@props(['title', 'search' => false, 'create' => false, 'keyword' => '', 'buttonName' => '追加'])
 
 <div class="pb-5 mb-5 border-b border-gray-200 flex items-center justify-between mt-3">
     <h3 class="text-xl leading-6 font-medium text-gray-900">
@@ -16,7 +16,7 @@
             <x-atoms.button-primary round="true" size="xl" data-href="{{ $create }}" data-method="GET"
                 class="mt-3 mt-0 ml-3 submit">
                 <x-atoms.svg-plus size="xl" />
-                追加
+                {{ $buttonName }}
             </x-atoms.button-primary>
         @endif
     </div>

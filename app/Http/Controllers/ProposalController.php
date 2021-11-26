@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Project;
 use App\Models\Proposal;
 use Illuminate\Http\Request;
 
@@ -22,9 +23,11 @@ class ProposalController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create(Request $request)
     {
-        //
+        $project = Project::whereUuid($request->project_uuid)->firstOrFail();
+        $proposal = new Proposal();
+        return view('pages.proposal.create-edit', compact('project', 'proposal'));
     }
 
     /**
