@@ -14,9 +14,9 @@ use App\Models\BaseModel;
  * @property string $deleted_at
  * @property string $created_at
  * @property string $updated_at
- * @property User[] $usersCompanies
  * @property Project[] $projectsCompanies
  * @property Proposal[] $proposalsCompanies
+ * @property User[] $usersCompanies
  */
 class Company extends BaseModel
 {
@@ -35,14 +35,6 @@ class Company extends BaseModel
     /**
      * @return \Illuminate\Database\Eloquent\Relations\HasMany
      */
-    public function usersCompanies()
-    {
-        return $this->hasMany('App\Models\User');
-    }
-
-    /**
-     * @return \Illuminate\Database\Eloquent\Relations\HasMany
-     */
     public function projectsCompanies()
     {
         return $this->hasMany('App\Models\Project');
@@ -54,5 +46,13 @@ class Company extends BaseModel
     public function proposalsCompanies()
     {
         return $this->hasMany('App\Models\Proposal');
+    }
+
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function usersCompanies()
+    {
+        return $this->hasMany('App\Models\User');
     }
 }

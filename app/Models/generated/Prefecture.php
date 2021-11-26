@@ -13,8 +13,8 @@ use App\Models\BaseModel;
  * @property string $deleted_at
  * @property string $created_at
  * @property string $updated_at
- * @property User[] $usersPrefectures
  * @property Project[] $projectsDeliveryPrefectures
+ * @property User[] $usersPrefectures
  */
 class Prefecture extends BaseModel
 {
@@ -47,16 +47,16 @@ class Prefecture extends BaseModel
     /**
      * @return \Illuminate\Database\Eloquent\Relations\HasMany
      */
-    public function usersPrefectures()
+    public function projectsDeliveryPrefectures()
     {
-        return $this->hasMany('App\Models\User', 'prefecture_code', 'code');
+        return $this->hasMany('App\Models\Project', 'delivery_prefecture_code', 'code');
     }
 
     /**
      * @return \Illuminate\Database\Eloquent\Relations\HasMany
      */
-    public function projectsDeliveryPrefectures()
+    public function usersPrefectures()
     {
-        return $this->hasMany('App\Models\Project', 'delivery_prefecture_code', 'code');
+        return $this->hasMany('App\Models\User', 'prefecture_code', 'code');
     }
 }

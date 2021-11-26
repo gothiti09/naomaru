@@ -173,10 +173,10 @@ class CreateAll extends Migration
         Schema::create('project_stages', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('project_id');
-            $table->unsignedBigInteger('staege_id');
+            $table->unsignedBigInteger('stage_id');
             $this->addCommonColumn($table);
             $table->foreign('project_id')->references('id')->on('projects');
-            $table->foreign('staege_id')->references('id')->on('stages');
+            $table->foreign('stage_id')->references('id')->on('stages');
         });
 
         Schema::create('project_methods', function (Blueprint $table) {

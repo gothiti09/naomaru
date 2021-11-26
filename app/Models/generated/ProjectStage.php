@@ -7,14 +7,14 @@ use App\Models\BaseModel;
 /**
  * @property integer $id
  * @property integer $project_id
- * @property integer $staege_id
+ * @property integer $stage_id
  * @property integer $created_by
  * @property integer $updated_by
  * @property string $deleted_at
  * @property string $created_at
  * @property string $updated_at
  * @property Project $project
- * @property Stage $staege
+ * @property Stage $stage
  */
 class ProjectStage extends BaseModel
 {
@@ -28,7 +28,7 @@ class ProjectStage extends BaseModel
     /**
      * @var array
      */
-    protected $fillable = ['project_id', 'staege_id', 'created_by', 'updated_by', 'deleted_at', 'created_at', 'updated_at'];
+    protected $fillable = ['project_id', 'stage_id', 'created_by', 'updated_by', 'deleted_at', 'created_at', 'updated_at'];
 
     /**
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
@@ -41,8 +41,8 @@ class ProjectStage extends BaseModel
     /**
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
      */
-    public function staege()
+    public function stage()
     {
-        return $this->belongsTo('App\Models\Stage', 'staege_id');
+        return $this->belongsTo('App\Models\Stage');
     }
 }

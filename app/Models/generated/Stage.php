@@ -12,7 +12,7 @@ use App\Models\BaseModel;
  * @property string $deleted_at
  * @property string $created_at
  * @property string $updated_at
- * @property ProjectStage[] $projectStagesStaeges
+ * @property ProjectStage[] $projectStagesStages
  */
 class Stage extends BaseModel
 {
@@ -31,8 +31,8 @@ class Stage extends BaseModel
     /**
      * @return \Illuminate\Database\Eloquent\Relations\HasMany
      */
-    public function projectStagesStaeges()
+    public function projectStagesStages()
     {
-        return $this->hasMany('App\Models\ProjectStage', 'staege_id');
+        return $this->hasMany('App\Models\ProjectStage');
     }
 }
