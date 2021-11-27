@@ -31,7 +31,7 @@ class UserRequest extends FormRequest
         }
         return [
             'company.corporate_number' => ['required', 'integer', 'digits_between:13,15'],
-            'login_id' => ['required', 'string', 'min:6', 'max:255', Rule::unique('users')->whereNull('deleted_at')->ignore($this->user)],
+            'login_id' => ['required', 'string', 'min:6', 'max:255', Rule::unique('users')->where('company_id', $this->user->company_id)->whereNull('deleted_at')->ignore($this->user)],
             'name' => ['required', 'string', 'max:255'],
             'email' => ['required', 'string', 'email', 'max:255', Rule::unique('users')->whereNull('deleted_at')->ignore($this->user)],
             'password' => ['nullable', 'confirmed', Password::defaults()],

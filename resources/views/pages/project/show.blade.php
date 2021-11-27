@@ -73,10 +73,24 @@ EOT;
         </div>
         <div class="flex flex-col items-center">
             <x-molecules.button-area>
-                <x-molecules.button-submit method="GET" data-action="{{ route('proposal.create', ['project_uuid' => $project->uuid]) }}">
+                <x-molecules.button-submit method="GET"
+                    data-action="{{ route('proposal.create', ['project_uuid' => $project->uuid]) }}">
                     提案する
                 </x-molecules.button-submit>
             </x-molecules.button-area>
         </div>
+        @if ($project->proposals?->count())
+            <div class="bg-white shadow overflow-hidden rounded-md">
+                <ul role="list" class="divide-y divide-gray-200">
+                    @foreach ($project->proposals as $proposal)
+                        <li>
+                            <a href="{{ route('proposal.show', $proposal->uuid) }}" class="block hover:bg-gray-50">
+                                <x-organisms.proposal :proposal="$proposal" />
+                            </a>
+                        </li>
+                    @endforeach
+                </ul>
+            </div>
+        @endif
     </form>
 @endsection

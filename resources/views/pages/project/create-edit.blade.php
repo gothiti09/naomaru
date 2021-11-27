@@ -77,7 +77,7 @@ EOT;
                         </div>
                     </x-molecules.dd-dt>
                     <x-molecules.dd-dt label="希望納期" required=true>
-                        <x-atoms.input name="desired_delivery_at" :value="$project->deesired_delivery_at" required=true
+                        <x-atoms.input name="desired_delivery_at" :value="$project->desired_delivery_at" required=true
                             type="date" />
                     </x-molecules.dd-dt>
                     <x-molecules.dd-dt label="提案期限" required=true>

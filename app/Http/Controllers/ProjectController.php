@@ -44,7 +44,7 @@ class ProjectController extends Controller
     public function store(Request $request)
     {
         Project::createByRequest($request);
-        return redirect('/')->with('success', '登録しました');
+        return redirect('/')->with('success', '募集を登録しました');
     }
 
     /**

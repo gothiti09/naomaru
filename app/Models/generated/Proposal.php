@@ -18,7 +18,6 @@ use App\Models\BaseModel;
  * @property string $cancel_at
  * @property string $cancel_reason
  * @property int $budget
- * @property boolean $open
  * @property string $deleted_at
  * @property string $created_at
  * @property string $updated_at
@@ -38,7 +37,7 @@ class Proposal extends BaseModel
     /**
      * @var array
      */
-    protected $fillable = ['project_id', 'company_id', 'created_by', 'updated_by', 'uuid', 'description', 'proposal_at', 'delivery_at', 'request_meeting_at', 'cancel_at', 'cancel_reason', 'budget', 'open', 'deleted_at', 'created_at', 'updated_at'];
+    protected $fillable = ['project_id', 'company_id', 'created_by', 'updated_by', 'uuid', 'description', 'proposal_at', 'delivery_at', 'request_meeting_at', 'cancel_at', 'cancel_reason', 'budget', 'deleted_at', 'created_at', 'updated_at'];
 
     /**
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo

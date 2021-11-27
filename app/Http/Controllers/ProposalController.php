@@ -38,7 +38,8 @@ class ProposalController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        Proposal::createByRequest($request);
+        return redirect('/')->with('success', '提案を登録しました');
     }
 
     /**
@@ -49,7 +50,8 @@ class ProposalController extends Controller
      */
     public function show(Proposal $proposal)
     {
-        //
+        $project = $proposal->project;
+        return view('pages.proposal.show', compact('project', 'proposal'));
     }
 
     /**
@@ -73,6 +75,19 @@ class ProposalController extends Controller
     public function update(Request $request, Proposal $proposal)
     {
         //
+    }
+
+    /**
+     * Update the specified resource in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @param  \App\Models\Proposal  $proposal
+     * @return \Illuminate\Http\Response
+     */
+    public function requestMeeting(Request $request, Proposal $proposal)
+    {
+        $proposal->fill(['request_meeting_at' => now()])->save();
+        return redirect(route('proposal.show', $proposal->uuid))->with('success', 'Web面談を依頼しました。<br>3営業日以内に事務局から連絡させていただきますので、しばらくお待ち下さい。');
     }
 
     /**

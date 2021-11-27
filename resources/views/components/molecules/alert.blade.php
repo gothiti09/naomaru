@@ -12,7 +12,7 @@
             </div>
             <div class="ml-3">
                 <p class="text-sm font-medium text-green-800">
-                    {{ session('success') }}
+                    {!! session('success') !!}
                 </p>
             </div>
         </div>
@@ -39,7 +39,7 @@
                     <ul role="list" class="list-disc pl-5 space-y-1">
                         @foreach ($errors->all() as $error)
                             <li>
-                                {{ $error }}
+                                {!! $error !!}
                             </li>
                         @endforeach
                     </ul>

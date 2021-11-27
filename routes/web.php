@@ -22,6 +22,7 @@ Route::group(
         Route::resource('/company', 'CompanyController');
         Route::resource('/audit-level', 'AuditLevelController');
         Route::resource('/project', 'ProjectController');
+        Route::put('/proposal/{proposal}/request-meeting', 'ProposalController@requestMeeting')->name('proposal.request-meeting');
         Route::resource('/proposal', 'ProposalController');
         Route::resource('/stage', 'StageController');
         Route::resource('/method', 'MethodController');

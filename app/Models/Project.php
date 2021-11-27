@@ -35,6 +35,14 @@ class Project extends \App\Models\generated\Project
     /**
      * @return \Illuminate\Database\Eloquent\Relations\HasMany
      */
+    public function proposals()
+    {
+        return $this->hasMany('App\Models\Proposal');
+    }
+
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
     public function stages()
     {
         return $this->belongsToMany('App\Models\Stage', 'project_stages');
@@ -75,7 +83,6 @@ class Project extends \App\Models\generated\Project
     public static function createByRequest($request)
     {
         $project = self::create($request->all() + [
-            'uuid' => Str::uuid(),
             'company_id' => Auth::user()->company_id,
             'status' => 'start',
             'open_at' => now(),

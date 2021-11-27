@@ -103,11 +103,10 @@ class CreateAll extends Migration
             $table->text('description');
             $table->dateTime('proposal_at');
             $table->dateTime('delivery_at');
-            $table->dateTime('request_meeting_at');
+            $table->dateTime('request_meeting_at')->nullable();
             $table->dateTime('cancel_at')->nullable();
             $table->string('cancel_reason')->nullable();
             $table->integer('budget')->nullable();
-            $table->boolean('open')->default(true);
             $this->addCommonColumn($table);
             $table->foreign('project_id')->references('id')->on('projects');
             $table->foreign('company_id')->references('id')->on('companies');
