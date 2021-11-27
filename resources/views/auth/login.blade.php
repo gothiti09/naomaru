@@ -15,12 +15,20 @@
         <form method="POST" action="{{ route('login') }}">
             @csrf
 
-            <!-- Email Address -->
+            <!-- 法人番号 -->
             <div>
-                <x-atoms.label for="email" :value="__('Email')" />
+                <x-atoms.label for="corporate_number" value="法人番号" />
 
-                <x-atoms.input id="email" class="block mt-1 w-full" type="email" name="email"
-                    :value="old('email', request()->get('email'))" required autofocus />
+                <x-atoms.input id="corporate_number" class="block mt-1 w-full" name="corporate_number"
+                    :value="old('corporate_number', request()->get('corporate_number'))" required autofocus />
+            </div>
+
+            <!-- ログインID -->
+            <div class="mt-4">
+                <x-atoms.label for="login_id" value="ログインID" />
+
+                <x-atoms.input id="login_id" class="block mt-1 w-full" name="login_id"
+                    :value="old('login_id', request()->get('login_id'))" required />
             </div>
 
             <!-- Password -->

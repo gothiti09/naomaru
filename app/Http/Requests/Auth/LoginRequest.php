@@ -29,7 +29,8 @@ class LoginRequest extends FormRequest
     public function rules()
     {
         return [
-            'email' => ['required', 'string', 'email'],
+            'corporate_number' => ['required', 'string'],
+            'login_id' => ['required', 'string'],
             'password' => ['required', 'string'],
         ];
     }
@@ -89,5 +90,13 @@ class LoginRequest extends FormRequest
     public function throttleKey()
     {
         return Str::lower($this->input('email')).'|'.$this->ip();
+    }
+
+    public function attributes()
+    {
+        return [
+            'corporate_number' => '法人番号',
+            'login_id' => 'ログインID',
+        ];
     }
 }

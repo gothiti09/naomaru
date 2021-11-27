@@ -39,7 +39,7 @@
                         <p class="text-gray-500 text-xs">半角英数字8文字以上</p>
                     </x-molecules.dd-dt>
                     <x-molecules.dd-dt label="パスワード（確認）">
-                        <x-atoms.input name="confirmed" type="password" />
+                        <x-atoms.input name="password_confirmation" type="password" />
                         <p class="text-gray-500 text-xs">確認のためパスワードを再入力してください。</p>
                     </x-molecules.dd-dt>
                     <x-molecules.dd-dt label="部署名・チーム名" required=true>

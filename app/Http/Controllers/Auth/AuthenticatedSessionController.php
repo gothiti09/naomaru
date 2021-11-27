@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Auth\LoginRequest;
+use App\Models\User;
 use App\Providers\RouteServiceProvider;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -28,6 +29,10 @@ class AuthenticatedSessionController extends Controller
      */
     public function store(LoginRequest $request)
     {
+        // 法人番号とログインIDでログインするためにメールアドレスを取得する処理を追加
+        $user = User::getByCorporateNumberAndId($request->corporate_number, $request->login_id);
+        $request->merge(['email' => $user->email]);
+
         $request->authenticate();
 
         $request->session()->regenerate();

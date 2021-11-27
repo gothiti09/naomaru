@@ -19,4 +19,9 @@ class User extends \App\Models\generated\User
         return 'uuid';
     }
 
+    public static function getByCorporateNumberAndId($corporate_number, $login_id) {
+        $company = Company::whereCorporateNumber($corporate_number)->first();
+        return self::whereCompanyId($company->id)->whereLoginId($login_id)->first();
+    }
+
 }
