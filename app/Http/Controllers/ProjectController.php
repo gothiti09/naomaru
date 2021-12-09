@@ -55,6 +55,7 @@ class ProjectController extends Controller
      */
     public function show(Project $project)
     {
+        $project->load('projectFiles');
         return view('pages.project.show', compact('project'));
     }
 

@@ -9,6 +9,7 @@ use App\Models\BaseModel;
  * @property integer $project_id
  * @property integer $created_by
  * @property integer $updated_by
+ * @property string $uuid
  * @property string $name
  * @property string $path
  * @property string $deleted_at
@@ -28,7 +29,7 @@ class ProjectFile extends BaseModel
     /**
      * @var array
      */
-    protected $fillable = ['project_id', 'created_by', 'updated_by', 'name', 'path', 'deleted_at', 'created_at', 'updated_at'];
+    protected $fillable = ['project_id', 'created_by', 'updated_by', 'uuid', 'name', 'path', 'deleted_at', 'created_at', 'updated_at'];
 
     /**
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo

@@ -11,7 +11,7 @@ EOT;
 @section('content')
     <x-molecules.breadcrumbs :links="[]" />
     <x-organisms.page-header title="募集登録" />
-    <form action="" name="form" method="POST" class="space-y-4"
+    <form action="" name="form" method="POST" class="space-y-4" enctype="multipart/form-data"
         x-data="{ showButton:false, openBudget: {{ $project->budget_undecided ? 'false' : 'true' }} }">
         @csrf
         <div class="bg-white shadow overflow-hidden rounded-lg mb-4">
@@ -43,9 +43,21 @@ EOT;
                         @endforeach
                     </x-molecules.dd-dt>
                     <x-molecules.dd-dt label="添付ファイル">
-                        <p class="text-gray-500 text-xs">※ 添付する際、機密情報に当たる内容は掲載しないでください。見積できる最低限の情報のみを添付下さい</p>
-                        <p class="text-gray-500 text-xs">例.図面は重要寸法部や公差の厳しい部分だけ記載するなど</p>
-                        <p class="text-gray-500 text-xs">※ 1ファイル10MBまで。5ファイルまで。</p>
+                        <div class="space-y-1">
+                            <x-atoms.input-file id="file" name="file[]" />
+                            <x-atoms.input-file id="file" name="file[]" />
+                            <x-atoms.input-file id="file" name="file[]" />
+                            <x-atoms.input-file id="file" name="file[]" />
+                            <x-atoms.input-file id="file" name="file[]" />
+                        </div>
+                        <div class="mt-1 text-gray-500 text-xs" id="user_avatar_help">
+                            <p>※ 添付する際、機密情報に当たる内容は掲載しないでください。見積できる最低限の情報のみを添付下さい。</p>
+                            <p>例.図面は重要寸法部や公差の厳しい部分だけ記載するなど</p>
+                            <p>※ 1ファイル10MBまで。5ファイルまで。</p>
+                        </div>
+
+
+
                     </x-molecules.dd-dt>
 
                 </dl>

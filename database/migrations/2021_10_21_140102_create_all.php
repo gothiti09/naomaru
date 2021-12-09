@@ -153,6 +153,7 @@ class CreateAll extends Migration
 
         Schema::create('project_files', function (Blueprint $table) {
             $table->id();
+            $table->uuid('uuid')->unique();
             $table->unsignedBigInteger('project_id');
             $table->string('name');
             $table->string('path');

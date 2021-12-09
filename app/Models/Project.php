@@ -48,6 +48,11 @@ class Project extends \App\Models\generated\Project
         return $this->belongsToMany('App\Models\Stage', 'project_stages');
     }
 
+    public function projectFiles()
+    {
+        return $this->hasMany('App\Models\ProjectFile');
+    }
+
     /**
      * @return \Illuminate\Database\Eloquent\Relations\HasMany
      */
@@ -90,6 +95,15 @@ class Project extends \App\Models\generated\Project
 
         $project->stages()->attach($request->stages);
         $project->methods()->attach($request->methods);
+
+        $files = $request->file('file');
+        foreach ((array)$files as $file) {
+            $path = $file->store('');
+            $project->projectFiles()->create([
+                'name' => $file->getClientOriginalName(),
+                'path' => $path,
+            ]);
+        }
     }
 
     public function getBudgetAttribute()

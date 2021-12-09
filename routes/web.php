@@ -29,6 +29,7 @@ Route::group(
         Route::resource('/audit-item', 'AuditItemController');
         Route::resource('/user-audit', 'UserAuditController');
         Route::resource('/audit-item-answer', 'AuditItemAnswerController');
+        Route::get('/project-file/{projectFile}/download', 'ProjectFileController@download')->name('project-file.download');
         Route::resource('/project-file', 'ProjectFileController');
         Route::resource('/proposal-file', 'ProposalFileController');
         Route::resource('/project-stage', 'ProjectStageController');
