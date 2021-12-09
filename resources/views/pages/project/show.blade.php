@@ -41,12 +41,13 @@ EOT;
                         @endforeach
                     </x-molecules.dd-dt>
                     <x-molecules.dd-dt label="添付ファイル">
-                            @foreach ($project->projectFiles as $projectFile)
-                                <x-atoms.link href="{{ route('project-file.download', $projectFile->uuid) }}">
-                                    {{ $projectFile->name }}
-                                </x-atoms.link>
-                                <br>
-                            @endforeach
+                        <div class="sm:text-sm">
+                        @foreach ($project->projectFiles as $projectFile)
+                            <x-atoms.link href="{{ route('project-file.download', $projectFile->uuid) }}">
+                                {{ $projectFile->name }}
+                            </x-atoms.link>
+                        @endforeach
+                        </div>
                     </x-molecules.dd-dt>
                 </dl>
             </div>
