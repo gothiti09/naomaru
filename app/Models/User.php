@@ -24,4 +24,12 @@ class User extends \App\Models\generated\User
         return self::whereCompanyId($company->id)->whereLoginId($login_id)->first();
     }
 
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function user_emails()
+    {
+        return $this->hasMany('App\Models\UserEmail');
+    }
+
 }

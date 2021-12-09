@@ -65,7 +65,7 @@
             <div class="border-t border-gray-200 px-4 py-5 sm:p-0">
                 <dl class="sm:divide-y sm:divide-gray-200">
                     <x-molecules.dd-dt label="メールアドレス">
-                        <x-atoms.input name="email" :value="$user->email" type="email" />
+                        <x-atoms.input name="email" :value="$user->email" type="email" required=true />
                     </x-molecules.dd-dt>
                     <x-molecules.dd-dt label="名前" required=true>
                         <x-atoms.input name="name" :value="$user->name" required=true />
@@ -85,6 +85,34 @@
                             :option="['10' => '10代', '20' => '20代', '30' => '30代', '40' => '40代', '50' => '50代', '60' => '60代', ]"
                             selected="{{ $user->age_range }}" placeholder="選択してください" required=true />
                     </x-molecules.dd-dt>
+                </dl>
+            </div>
+        </div>
+        <div class="bg-white shadow overflow-hidden rounded-lg mb-4">
+            <div class="px-4 py-5 sm:px-6">
+                <h3 class="text-lg leading-6 font-medium text-gray-900">
+                    通知先メールアドレス
+                </h3>
+            </div>
+            <div class="border-t border-gray-200 px-4 py-5 sm:p-0">
+                <dl class="sm:divide-y sm:divide-gray-200">
+                    <x-molecules.dd-dt label="メールアドレス1">
+                        <x-atoms.input name="user_emails[]" :value="$user->user_emails[0]?->email ?? ''" type="email" />
+                    </x-molecules.dd-dt>
+                    <x-molecules.dd-dt label="メールアドレス2">
+                        <x-atoms.input name="user_emails[]" :value="$user->user_emails[1]?->email ?? ''" type="email" />
+                    </x-molecules.dd-dt>
+                    <x-molecules.dd-dt label="メールアドレス3">
+                        <x-atoms.input name="user_emails[]" :value="$user->user_emails[2]?->email ?? ''" type="email" />
+                    </x-molecules.dd-dt>
+                    <x-molecules.dd-dt label="メールアドレス4">
+                        <x-atoms.input name="user_emails[]" :value="$user->user_emails[3]?->email ?? ''" type="email" />
+                    </x-molecules.dd-dt>
+                    <x-molecules.dd-dt label="メールアドレス5">
+                        <x-atoms.input name="user_emails[]" :value="$user->user_emails[4]?->email ?? ''" type="email" />
+                    </x-molecules.dd-dt>
+
+
                 </dl>
             </div>
         </div>

@@ -43,7 +43,8 @@ class ProposalController extends Controller
     public function store(Request $request)
     {
         $proposal = Proposal::createByRequest($request);
-        Mail::to($proposal->project->createdBy)->send(new CreatePrososal($proposal));
+        // ユーザーメールアドレスとユーザーの通知メールアドレスに送信
+        Mail::to([$proposal->project->createdBy->email] + $proposal->project->createdBy->user_emails->pluck('email')->toArray())->send(new CreatePrososal($proposal));
         Mail::to(config('domain.admin_mail'))->send(new CreatePrososalForAdmin($proposal));
         return redirect('/')->with('success', '提案を登録しました');
     }

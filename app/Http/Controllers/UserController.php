@@ -61,6 +61,7 @@ class UserController extends Controller
      */
     public function edit(User $user)
     {
+        $user->load('user_emails');
         $company = $user->company;
         $prefectures = Prefecture::get();
         return view('pages.user.create-edit', compact('user', 'company', 'prefectures'));
@@ -93,6 +94,14 @@ class UserController extends Controller
             'corporate_number' => $request->company['corporate_number'],
             'name' => $request->company['name'],
         ])->save();
+
+        // 通知先メールアドレスをDELETE&CREATE
+        // user_emailsは同一メールは許容（A社の複数ユーザで同じメアドを登録する可能性あるため。例えば監査部署メアドなど。validate実装も煩雑になる。）
+        $user->user_emails()->delete();
+        foreach ($request->user_emails as $user_email) {
+            if (!$user_email) continue;// nullの場合は登録しない。
+            $user->user_emails()->create(['email' => $user_email]);
+        }
         return redirect('/')->with('success', '更新しました');
     }
 

@@ -33,6 +33,7 @@ use App\Models\BaseUserModel;
  * @property Company $company
  * @property AuditLevel $auditLevel
  * @property Prefecture $prefecture
+ * @property UserEmail[] $userEmailsUsers
  */
 class User extends BaseUserModel
 {
@@ -70,5 +71,13 @@ class User extends BaseUserModel
     public function prefecture()
     {
         return $this->belongsTo('App\Models\Prefecture', 'prefecture_code', 'code');
+    }
+
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function userEmailsUsers()
+    {
+        return $this->hasMany('App\Models\UserEmail');
     }
 }

@@ -40,6 +40,14 @@ class CreateAll extends Migration
             $table->unique(['company_id', 'login_id', 'deleted_at'], 'users_login_id_unique');
         });
 
+        Schema::create('user_emails', function (Blueprint $table) {
+            $table->id();
+            $table->unsignedBigInteger('user_id');
+            $table->string('email');
+            $this->addCommonColumn($table);
+            $table->foreign('user_id')->references('id')->on('users');
+        });
+
         Schema::create('prefectures', function (Blueprint $table) {
             $table->char('code', 2)->primary();
             $table->unsignedBigInteger('region_id');
