@@ -30,9 +30,12 @@ EOT;
                             <x-atoms.text>{{ $proposal->description }}</x-atoms.text>
                         </x-molecules.dd-dt>
                         <x-molecules.dd-dt label="添付ファイル">
-                            <p class="text-gray-500 text-xs">※ 添付する際、機密情報に当たる内容は掲載しないでください。見積できる最低限の情報のみを添付下さい</p>
-                            <p class="text-gray-500 text-xs">例.図面は重要寸法部や公差の厳しい部分だけ記載するなど</p>
-                            <p class="text-gray-500 text-xs">※ 1ファイル10MBまで。5ファイルまで。</p>
+                            @foreach ($proposal->proposalFiles as $proposalFile)
+                                <x-atoms.link href="{{ route('proposal-file.download', $proposalFile->uuid) }}">
+                                    {{ $proposalFile->name }}
+                                </x-atoms.link>
+                                <br>
+                            @endforeach
                         </x-molecules.dd-dt>
 
                     </dl>

@@ -163,6 +163,7 @@ class CreateAll extends Migration
 
         Schema::create('proposal_files', function (Blueprint $table) {
             $table->id();
+            $table->uuid('uuid')->unique();
             $table->unsignedBigInteger('proposal_id');
             $table->string('name');
             $table->string('path');

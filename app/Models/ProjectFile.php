@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use Illuminate\Support\Str;
+
 class ProjectFile extends \App\Models\generated\ProjectFile
 {
     public function __construct(array $attributes = [])

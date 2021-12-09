@@ -26,6 +26,14 @@ class Proposal extends \App\Models\generated\Proposal
         'cancel_at',
     ];
 
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function proposalFiles()
+    {
+        return $this->hasMany('App\Models\ProposalFile');
+    }
+
     public static function mine()
     {
         return self::whereCreatedBy(Auth::id())->get();
@@ -35,7 +43,7 @@ class Proposal extends \App\Models\generated\Proposal
     {
         $project = Project::whereUuid($request->project_uuid)->firstOrFail();
 
-        $project = self::create($request->only([
+        $proposal = self::create($request->only([
             'description',
             'budget',
             'delivery_at',
@@ -44,6 +52,15 @@ class Proposal extends \App\Models\generated\Proposal
             'project_id' => $project->id,
             'proposal_at' => now(),
         ]);
+
+        $files = $request->file('file');
+        foreach ((array)$files as $file) {
+            $path = $file->store('');
+            $proposal->proposalFiles()->create([
+                'name' => $file->getClientOriginalName(),
+                'path' => $path,
+            ]);
+        }
     }
 
     /**
