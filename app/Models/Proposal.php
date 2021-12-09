@@ -61,6 +61,8 @@ class Proposal extends \App\Models\generated\Proposal
                 'path' => $path,
             ]);
         }
+
+        return $proposal;
     }
 
     /**

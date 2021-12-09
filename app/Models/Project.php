@@ -104,6 +104,8 @@ class Project extends \App\Models\generated\Project
                 'path' => $path,
             ]);
         }
+
+        return $project;
     }
 
     public function getBudgetAttribute()

@@ -2,9 +2,13 @@
 
 namespace App\Http\Controllers;
 
+use App\Mail\CreatePrososal;
+use App\Mail\CreatePrososalForAdmin;
+use App\Mail\ReqestMeetingForAdmin;
 use App\Models\Project;
 use App\Models\Proposal;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Mail;
 
 class ProposalController extends Controller
 {
@@ -38,7 +42,9 @@ class ProposalController extends Controller
      */
     public function store(Request $request)
     {
-        Proposal::createByRequest($request);
+        $proposal = Proposal::createByRequest($request);
+        Mail::to($proposal->project->createdBy)->send(new CreatePrososal($proposal));
+        Mail::to(config('domain.admin_mail'))->send(new CreatePrososalForAdmin($proposal));
         return redirect('/')->with('success', '提案を登録しました');
     }
 
@@ -87,6 +93,7 @@ class ProposalController extends Controller
     public function requestMeeting(Request $request, Proposal $proposal)
     {
         $proposal->fill(['request_meeting_at' => now()])->save();
+        Mail::to(config('domain.admin_mail'))->send(new ReqestMeetingForAdmin($proposal));
         return redirect(route('proposal.show', $proposal->uuid))->with('success', 'Web面談を依頼しました。<br>3営業日以内に事務局から連絡させていただきますので、しばらくお待ち下さい。');
     }
 

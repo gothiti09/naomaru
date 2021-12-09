@@ -104,6 +104,9 @@ class CreateAll extends Migration
             $table->dateTime('proposal_at');
             $table->dateTime('delivery_at');
             $table->dateTime('request_meeting_at')->nullable();
+            $table->dateTime('desired_1_meeting_at')->nullable();
+            $table->dateTime('desired_2_meeting_at')->nullable();
+            $table->dateTime('desired_3_meeting_at')->nullable();
             $table->dateTime('cancel_at')->nullable();
             $table->string('cancel_reason')->nullable();
             $table->integer('budget')->nullable();
