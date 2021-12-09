@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Mail\CreateProject;
+use App\Http\Requests\ProjectRequest;
 use App\Mail\CreateProjectForAdmin;
 use App\Models\Method;
 use App\Models\Prefecture;
@@ -10,7 +10,6 @@ use App\Models\Project;
 use App\Models\Stage;
 use App\Models\User;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Mail;
 
 class ProjectController extends Controller
@@ -46,7 +45,7 @@ class ProjectController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(ProjectRequest $request)
     {
         $project = Project::createByRequest($request);
         Mail::to(config('domain.admin_mail'))->send(new CreateProjectForAdmin($project));

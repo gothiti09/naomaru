@@ -77,12 +77,12 @@ EOT;
                         <div class="mt-2 flex sm:flex-row gap-2 flex-col items-center justify-items-stretch"
                             x-show="openBudget">
                             <div class="flex flex-col items-left sm:w-1/2 w-full">
-                                <p class="text-gray-500 text-xs whitespace-nowrap w-1/3 text-left">希望上限予算（円）</p>
+                                <p class="text-gray-500 text-xs whitespace-nowrap w-1/3 text-left">希望下限予算（円）</p>
                                 <x-atoms.input name="min_budget" class="w-2/3" :value="$project->min_budget"
                                     type="number" />
                             </div>
                             <div class="flex flex-col items-left sm:w-1/2 w-full">
-                                <p class="text-gray-500 text-xs whitespace-nowrap w-1/3 text-left">希望下限予算（円）</p>
+                                <p class="text-gray-500 text-xs whitespace-nowrap w-1/3 text-left">希望上限予算（円）</p>
                                 <x-atoms.input name="max_budget" class="w-2/3" :value="$project->max_budget"
                                     type="number" />
                             </div>

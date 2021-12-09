@@ -87,6 +87,12 @@ class Project extends \App\Models\generated\Project
 
     public static function createByRequest($request)
     {
+        if ($request->budget_undecided) {
+            $request->merge([
+                'min_budget' => null,
+                'max_budget' => null,
+            ]);
+        }
         $project = self::create($request->all() + [
             'company_id' => Auth::user()->company_id,
             'status' => 'start',
