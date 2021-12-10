@@ -21,7 +21,7 @@ class ProjectController extends Controller
      */
     public function index()
     {
-        $projects = Project::get();
+        $projects = Project::where('close_at', '>=', today())->orderBy('created_at', 'desc')->get();
         return view('pages.project.index', compact('projects'));
     }
 

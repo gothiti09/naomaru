@@ -29,7 +29,7 @@ class Project extends \App\Models\generated\Project
 
     public static function mine()
     {
-        return self::whereCreatedBy(Auth::id())->get();
+        return self::whereCreatedBy(Auth::id())->orderBy('created_at', 'desc')->get();
     }
 
     /**
