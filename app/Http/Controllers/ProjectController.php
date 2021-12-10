@@ -8,7 +8,6 @@ use App\Models\Method;
 use App\Models\Prefecture;
 use App\Models\Project;
 use App\Models\Stage;
-use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Mail;
 
@@ -19,10 +18,11 @@ class ProjectController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        $projects = Project::where('close_at', '>=', today())->orderBy('created_at', 'desc')->get();
-        return view('pages.project.index', compact('projects'));
+        $projects = Project::list($request);
+
+        return view('pages.project.index', compact('projects') + ['keyword' => $request->keyword]);
     }
 
     /**

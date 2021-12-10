@@ -85,6 +85,14 @@ class Project extends \App\Models\generated\Project
         return $this->belongsTo('App\Models\Company');
     }
 
+    public static function list($request)
+    {
+        return self::where(function ($query) use ($request) {
+            $query->where('title', 'like', '%' . $request->keyword . '%')
+                ->orWhere('description', 'like', '%' . $request->keyword . '%');
+        })->where('close_at', '>=', today())->orderBy('created_at', 'desc')->get();
+    }
+
     public static function createByRequest($request)
     {
         if ($request->budget_undecided) {
