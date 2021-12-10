@@ -1,42 +1,35 @@
 @props(['project', 'isList' => true])
 <div class="px-4 py-4 sm:px-6 space-y-2">
     <div class="flex items-center justify-between">
-        <p class="text-lg font-bold text-gray-900 truncate">
+        <p class="text-xl font-bold text-gray-900 truncate">
             {{ $project->title }}
         </p>
     </div>
     <div class="ml-2 flex flex-wrap justify-around gap-y-2">
         <div class="flex flex-col items-center sm:w-1/4 w-1/2">
-            <x-molecules.status-badge color="red" text="提案期限" />
-            <p class="text-sm font-medium text-gray-900 truncate">
+            <x-molecules.label-badge color="red" text="提案期限" />
+            <p class="text-lg font-medium text-gray-900 truncate">
                 {{ $project->close_at->format('Y年m月d日') }}
             </p>
         </div>
         <div class="flex flex-col items-center sm:w-1/4 w-1/2">
-            <x-molecules.status-badge color="gray" text="希望予算" />
-            <p class="text-sm font-medium text-gray-900 truncate">
+            <x-molecules.label-badge color="gray" text="希望予算" />
+            <p class="text-lg font-medium text-gray-900 truncate">
                 {{ $project->budget }}
             </p>
         </div>
         <div class="flex flex-col items-center sm:w-1/4 w-1/2">
-            <x-molecules.status-badge color="gray" text="希望納期" />
-            <p class="text-sm font-medium text-gray-900 truncate">
+            <x-molecules.label-badge color="gray" text="希望納期" />
+            <p class="text-lg font-medium text-gray-900 truncate">
                 {{ $project->desired_delivery_at->format('Y年m月d日') }}
             </p>
         </div>
         <div class="flex flex-col items-center sm:w-1/4 w-1/2">
-            <x-molecules.status-badge color="gray" text="納品場所" />
-            <p class="text-sm font-medium text-gray-900 truncate">
+            <x-molecules.label-badge color="gray" text="納品場所" />
+            <p class="text-lg font-medium text-gray-900 truncate">
                 {{ $project->deliveryPrefecture->name }}
             </p>
         </div>
-    </div>
-    <div class="flex items-center justify-between mt-2">
-        <p class="text-xs font-medium text-gray-900 truncate">
-            @if ($isList)
-                {{ $project->description }}
-            @endif
-        </p>
     </div>
     <div class="ml-2 flex-wrap flex gap-1 mt-2">
         @foreach ($project->stages as $stage)

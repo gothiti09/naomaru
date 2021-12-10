@@ -88,11 +88,20 @@ class Project extends \App\Models\generated\Project
     public static function createByRequest($request)
     {
         if ($request->budget_undecided) {
+            // 予算未定の場合は希望下限予算、希望上限予算はnull
             $request->merge([
                 'min_budget' => null,
                 'max_budget' => null,
             ]);
+        } else {
+            // 予算未定ではない場合はDBには円単位（表示はすべて万単位）で保持する
+            $request->merge([
+                'min_budget' => $request->min_budget_manyen * 10000,
+                'max_budget' => $request->max_budget_manyen * 10000,
+            ]);
         }
+
+
         $project = self::create($request->all() + [
             'company_id' => Auth::user()->company_id,
             'status' => 'start',
@@ -119,11 +128,21 @@ class Project extends \App\Models\generated\Project
         if ($this->budget_undecided) {
             return '未定';
         } elseif ($this->min_budget && $this->max_budget) {
-            return number_format($this->min_budget) . '円〜' . number_format($this->max_budget) . '円';
+            return number_format($this->min_budget_manyen) . '万円〜' . number_format($this->max_budget_manyen) . '万円';
         } elseif ($this->min_budget) {
-            return number_format($this->min_budget) . '円〜';
+            return number_format($this->min_budget_manyen) . '万円〜';
         } elseif ($this->min_budget) {
-            return '〜' . number_format($this->max_budget) . '円';
+            return '〜' . number_format($this->max_budget_manyen) . '万円';
         }
+    }
+
+    public function getMinBudgetManyenAttribute()
+    {
+        return $this->min_budget / 10000;
+    }
+
+    public function getMaxBudgetManyenAttribute()
+    {
+        return $this->max_budget / 10000;
     }
 }

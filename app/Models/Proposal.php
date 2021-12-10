@@ -45,7 +45,7 @@ class Proposal extends \App\Models\generated\Proposal
     public static function createByRequest($request)
     {
         $project = Project::whereUuid($request->project_uuid)->firstOrFail();
-
+        $request->merge(['budget' => $request->budget_manyen * 10000]);// 画面は万円単位のため
         $proposal = self::create($request->only([
             'description',
             'budget',
@@ -96,6 +96,10 @@ class Proposal extends \App\Models\generated\Proposal
 
     public function getBudgetTextAttribute()
     {
-        return number_format($this->budget) . '円';
+        return number_format($this->budget_manyen) . '万円';
+    }
+    public function getBudgetManyenAttribute()
+    {
+        return $this->budget / 10000;
     }
 }

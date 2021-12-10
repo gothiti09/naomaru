@@ -28,8 +28,8 @@ class ProjectRequest extends FormRequest
     {
         return [
             'title' => ['required', 'string', 'max:40'],
-            'budget_undecided' => ['required_without_all:min_budget,max_budget'],
-            'min_budget' => ['nullable', 'exclude_if:max_budget,null', 'lte:max_budget'],
+            'budget_undecided' => ['required_without_all:min_budget_manyen,max_budget_manyen'],
+            'min_budget_manyen' => ['nullable', 'exclude_if:max_budget_manyen,null', 'lte:max_budget_manyen'],
             'desired_delivery_at' => ['required', 'date_format:Y-m-d', 'after:close_at'],
             'close_at' => ['required', 'date_format:Y-m-d', 'after:today'],
             'file.*' => ['max:10000']
@@ -48,7 +48,7 @@ class ProjectRequest extends FormRequest
             'desired_delivery_at.after' => '希望納期は、提案期限より後の日付を指定してください。',
             'close_at.after' => '提案期限は、本日より後の日付を指定してください。',
             'file.*.max' => '添付ファイルは、1ファイル10MBまでにしてください。',
-            'min_budget.lte' => '希望下限予算は、希望上限予算より小さくなければなりません。',
+            'min_budget_manyen.lte' => '希望下限予算は、希望上限予算より小さくなければなりません。',
         ];
     }
 

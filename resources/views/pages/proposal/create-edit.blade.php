@@ -45,9 +45,9 @@ EOT;
             </div>
             <div class="border-t border-gray-200 px-4 py-5 sm:p-0">
                 <dl class="sm:divide-y sm:divide-gray-200">
-                    <x-molecules.dd-dt label="概算予算" required=true>
+                    <x-molecules.dd-dt label="概算予算（万円）" required=true>
                         <div class="mt-2 flex sm:flex-row gap-2 flex-col items-center justify-items-stretch">
-                            <x-atoms.input name="budget" class="w-2/3" :value="$proposal->min_budget"
+                            <x-atoms.input name="budget_manyen" class="w-2/3" :value="$proposal->budget_manyen"
                                 type="number" />
                         </div>
                     </x-molecules.dd-dt>

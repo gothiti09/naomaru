@@ -14,24 +14,17 @@
     </div>
     <div class="ml-2 flex flex-wrap justify-start gap-y-2">
         <div class="flex flex-col items-center sm:w-1/4 w-1/2">
-            <x-molecules.status-badge color="gray" text="提案金額" />
-            <p class="text-sm font-medium text-gray-900 truncate">
+            <x-molecules.label-badge color="gray" text="提案金額" />
+            <p class="text-lg font-medium text-gray-900 truncate">
                 {{ $proposal->budget_text }}
             </p>
         </div>
         <div class="flex flex-col items-center sm:w-1/4 w-1/2">
-            <x-molecules.status-badge color="gray" text="提案納期" />
-            <p class="text-sm font-medium text-gray-900 truncate">
+            <x-molecules.label-badge color="gray" text="提案納期" />
+            <p class="text-lg font-medium text-gray-900 truncate">
                 {{ $proposal->delivery_at->format('Y年m月d日') }}
             </p>
         </div>
-    </div>
-    <div class="flex items-center justify-between mt-2">
-        <p class="text-xs font-medium text-gray-900 truncate">
-            @if ($isList)
-                {{ $proposal->description }}
-            @endif
-        </p>
     </div>
     <div class="mt-2 sm:flex sm:justify-between items-end">
         <p class="flex items-center text-sm text-gray-500">

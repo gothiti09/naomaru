@@ -71,19 +71,19 @@ EOT;
             </div>
             <div class="border-t border-gray-200 px-4 py-5 sm:p-0">
                 <dl class="sm:divide-y sm:divide-gray-200">
-                    <x-molecules.dd-dt label="予算" required=true>
+                    <x-molecules.dd-dt label="予算（万円）" required=true>
                         <x-atoms.checkbox @click="openBudget=!openBudget" id="budget_undecided" name="budget_undecided"
                             label="予算未定" checked="{{ $project->budget_undecided }}" />
                         <div class="mt-2 flex sm:flex-row gap-2 flex-col items-center justify-items-stretch"
                             x-show="openBudget">
                             <div class="flex flex-col items-left sm:w-1/2 w-full">
-                                <p class="text-gray-500 text-xs whitespace-nowrap w-1/3 text-left">希望下限予算（円）</p>
-                                <x-atoms.input name="min_budget" class="w-2/3" :value="$project->min_budget"
+                                <p class="text-gray-500 text-xs whitespace-nowrap w-1/3 text-left">希望下限予算（万円）</p>
+                                <x-atoms.input name="min_budget_manyen" class="w-2/3" :value="$project->min_budget"
                                     type="number" />
                             </div>
                             <div class="flex flex-col items-left sm:w-1/2 w-full">
-                                <p class="text-gray-500 text-xs whitespace-nowrap w-1/3 text-left">希望上限予算（円）</p>
-                                <x-atoms.input name="max_budget" class="w-2/3" :value="$project->max_budget"
+                                <p class="text-gray-500 text-xs whitespace-nowrap w-1/3 text-left">希望上限予算（万円）</p>
+                                <x-atoms.input name="max_budget_manyen" class="w-2/3" :value="$project->max_budget"
                                     type="number" />
                             </div>
                         </div>
