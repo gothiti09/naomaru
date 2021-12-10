@@ -36,6 +36,7 @@ Route::group(
         Route::resource('/project-stage', 'ProjectStageController');
         Route::resource('/project-method', 'ProjectMethodController');
         Route::resource('/notification', 'NotificationController');
+        Route::resource('/request-audit', 'RequestAuditController');
     }
 );
 

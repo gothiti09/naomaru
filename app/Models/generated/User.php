@@ -34,6 +34,7 @@ use App\Models\BaseUserModel;
  * @property AuditLevel $auditLevel
  * @property Prefecture $prefecture
  * @property UserEmail[] $userEmailsUsers
+ * @property RequestAudit[] $requestAuditsUsers
  */
 class User extends BaseUserModel
 {
@@ -79,5 +80,13 @@ class User extends BaseUserModel
     public function userEmailsUsers()
     {
         return $this->hasMany('App\Models\UserEmail');
+    }
+
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function requestAuditsUsers()
+    {
+        return $this->hasMany('App\Models\RequestAudit');
     }
 }

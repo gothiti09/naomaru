@@ -199,6 +199,16 @@ class CreateAll extends Migration
             $table->foreign('project_id')->references('id')->on('projects');
             $table->foreign('method_id')->references('id')->on('methods');
         });
+
+        Schema::create('request_audits', function (Blueprint $table) {
+            $table->id();
+            $table->uuid('uuid')->unique();
+            $table->unsignedBigInteger('user_id');
+            $table->string('plan');
+            $table->text('description');
+            $this->addCommonColumn($table);
+            $table->foreign('user_id')->references('id')->on('users');
+        });
     }
 
     private function addCommonColumn($table, $created_by = true)
