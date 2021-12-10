@@ -58,10 +58,10 @@
         </p>
         <div>
             <p class="flex items-center text-sm text-gray-500 mt-0">
-                {{ $project->company->name }}
+                {{ $project->open ? $project->company->name : '非公開' }}
             </p>
             <p class="flex items-center text-sm text-gray-500 mt-0">
-                {{ $project->createdBy->name }}
+                {{ $project->open ? $project->createdBy->name : '非公開' }}
             </p>
         </div>
     </div>

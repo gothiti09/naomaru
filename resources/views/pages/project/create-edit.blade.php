@@ -55,11 +55,11 @@ EOT;
                             <p>例.図面は重要寸法部や公差の厳しい部分だけ記載するなど</p>
                             <p>※ 1ファイル10MBまで。5ファイルまで。</p>
                         </div>
-
-
-
                     </x-molecules.dd-dt>
-
+                    <x-molecules.dd-dt label="社名と氏名の公開" required=true>
+                        <x-atoms.radio name="open" :option="['1' => '公開します', '0' => '公開しません']"
+                            checked="{{ $project->open }}" required=true />
+                    </x-molecules.dd-dt>
                 </dl>
             </div>
         </div>
