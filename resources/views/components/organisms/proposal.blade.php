@@ -3,6 +3,10 @@
     <div class="flex items-center justify-start gap-2">
         @if ($proposal->request_meeting_at)
             <x-molecules.status-badge color="green" text="相談済み" />
+        @elseif ($proposal->project->close_at->lt(today()))
+            <x-molecules.status-badge color="gray" text="期限切れ" />
+        @else
+            <x-molecules.status-badge color="red" text="提案中" />
         @endif
         <p class="text-lg font-bold text-gray-900 truncate">
             {{ $proposal->project->title }}

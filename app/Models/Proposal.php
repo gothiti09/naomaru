@@ -39,7 +39,7 @@ class Proposal extends \App\Models\generated\Proposal
 
     public static function mine()
     {
-        return self::whereCreatedBy(Auth::id())->orderBy('created_at', 'desc')->get();
+        return self::whereCreatedBy(Auth::id())->orderBy('created_at', 'desc')->with('project')->get();
     }
 
     public static function createByRequest($request)
