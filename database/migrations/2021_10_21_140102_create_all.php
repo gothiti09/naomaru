@@ -135,31 +135,54 @@ class CreateAll extends Migration
             $this->addCommonColumn($table);
         });
 
-        Schema::create('audit_items', function (Blueprint $table) {
+        Schema::create('audit_item_groups', function (Blueprint $table) {
             $table->id();
             $table->string('title');
-            $table->integer('point');
-            $table->boolean('evidence')->default(false);
             $this->addCommonColumn($table);
         });
 
-        Schema::create('user_audits', function (Blueprint $table) {
+        Schema::create('audit_items', function (Blueprint $table) {
+            $table->id();
+            $table->unsignedBigInteger('audit_item_group_id');
+            $table->string('title');
+            $table->integer('point')->nullable();
+            $table->boolean('checkbox')->default(false);
+            $table->boolean('text')->default(false);
+            $table->boolean('evidence')->default(false);
+            $this->addCommonColumn($table);
+            $table->foreign('audit_item_group_id')->references('id')->on('audit_item_groups');
+        });
+
+        Schema::create('audits', function (Blueprint $table) {
             $table->id();
             $table->uuid('uuid')->unique();
-            $table->string('status')->index();
+            $table->date('checked_at')->nullable();
             $this->addCommonColumn($table);
+        });
+
+        Schema::create('audit_item_group_answers', function (Blueprint $table) {
+            $table->id();
+            $table->unsignedBigInteger('audit_id');
+            $table->string('title');
+            $this->addCommonColumn($table);
+            $table->foreign('audit_id')->references('id')->on('audits');
         });
 
         Schema::create('audit_item_answers', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('user_audit_id');
-            $table->unsignedBigInteger('audit_item_id');
+            $table->uuid('uuid')->unique();
+            $table->unsignedBigInteger('audit_item_group_answer_id');
             $table->string('title');
-            $table->integer('point');
-            $table->string('path');
+            $table->boolean('checkbox')->default(false);
+            $table->boolean('text')->default(false);
+            $table->boolean('evidence')->default(false);
+            $table->text('answer_text')->nullable();
+            $table->boolean('answer_check')->nullable();
+            $table->integer('point')->nullable();
+            $table->string('evidence_name')->nullable();
+            $table->string('evidence_path')->nullable();
             $this->addCommonColumn($table);
-            $table->foreign('user_audit_id')->references('id')->on('user_audits');
-            $table->foreign('audit_item_id')->references('id')->on('audit_items');
+            $table->foreign('audit_item_group_answer_id')->references('id')->on('audit_item_group_answers');
         });
 
         Schema::create('project_files', function (Blueprint $table) {

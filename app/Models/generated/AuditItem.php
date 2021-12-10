@@ -6,15 +6,18 @@ use App\Models\BaseModel;
 
 /**
  * @property integer $id
+ * @property integer $audit_item_group_id
  * @property integer $created_by
  * @property integer $updated_by
  * @property string $title
  * @property int $point
+ * @property boolean $checkbox
+ * @property boolean $text
  * @property boolean $evidence
  * @property string $deleted_at
  * @property string $created_at
  * @property string $updated_at
- * @property AuditItemAnswer[] $auditItemAnswersAuditItems
+ * @property AuditItemGroup $auditItemGroup
  */
 class AuditItem extends BaseModel
 {
@@ -28,13 +31,13 @@ class AuditItem extends BaseModel
     /**
      * @var array
      */
-    protected $fillable = ['created_by', 'updated_by', 'title', 'point', 'evidence', 'deleted_at', 'created_at', 'updated_at'];
+    protected $fillable = ['audit_item_group_id', 'created_by', 'updated_by', 'title', 'point', 'checkbox', 'text', 'evidence', 'deleted_at', 'created_at', 'updated_at'];
 
     /**
-     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
      */
-    public function auditItemAnswersAuditItems()
+    public function auditItemGroup()
     {
-        return $this->hasMany('App\Models\AuditItemAnswer');
+        return $this->belongsTo('App\Models\AuditItemGroup');
     }
 }

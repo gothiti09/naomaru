@@ -1,5 +1,5 @@
-@props(['label' => '', 'type' => 'text', 'name' => '', 'value' => '', 'autocomplete' => '', 'required' => false, 'disabled' => false])
-<div class="py-4 sm:py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6" {{ $attributes }}>
+@props(['cols' => 3,'label' => '', 'type' => 'text', 'name' => '', 'value' => '', 'autocomplete' => '', 'required' => false, 'disabled' => false])
+<div class="py-4 sm:py-5 sm:grid sm:grid-cols-{{$cols}} sm:gap-4 sm:px-6" {{ $attributes }}>
     <dt class="text-sm font-medium text-gray-500">
         {{ $label }}
         @if ($required && !$disabled)
@@ -8,7 +8,7 @@
             </p>
         @endif
     </dt>
-    <dd class="mt-1 text-lg text-gray-900 sm:mt-0 sm:col-span-2">
+    <dd class="mt-1 text-lg text-gray-900 sm:mt-0 {{$cols == 3 ? 'sm:col-span-2' : ''}}">
         {{ $slot }}
     </dd>
 </div>
