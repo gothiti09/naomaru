@@ -24,6 +24,9 @@ class Proposal extends \App\Models\generated\Proposal
         'proposal_at',
         'delivery_at',
         'cancel_at',
+        'desired_1_meeting_at',
+        'desired_2_meeting_at',
+        'desired_3_meeting_at',
     ];
 
     /**
@@ -63,6 +66,16 @@ class Proposal extends \App\Models\generated\Proposal
         }
 
         return $proposal;
+    }
+
+    public function requestMeeting($request)
+    {
+        $this->fill([
+            'request_meeting_at' => now(),
+            'desired_1_meeting_at' => $request->desired_1_meeting_at,
+            'desired_2_meeting_at' => $request->desired_2_meeting_at,
+            'desired_3_meeting_at' => $request->desired_3_meeting_at,
+        ])->save();
     }
 
     /**

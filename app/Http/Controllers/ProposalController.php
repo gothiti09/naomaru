@@ -93,7 +93,7 @@ class ProposalController extends Controller
      */
     public function requestMeeting(Request $request, Proposal $proposal)
     {
-        $proposal->fill(['request_meeting_at' => now()])->save();
+        $proposal->requestMeeting($request);
         Mail::to(config('domain.admin_mail'))->send(new ReqestMeetingForAdmin($proposal));
         return redirect(route('proposal.show', $proposal->uuid))->with('success', 'Web面談を依頼しました。<br>3営業日以内に事務局から連絡させていただきますので、しばらくお待ち下さい。');
     }

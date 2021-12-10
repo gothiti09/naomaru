@@ -54,17 +54,33 @@ EOT;
                 </div>
             </div>
             @if (!$proposal->request_meeting_at)
+                <div class="bg-white shadow overflow-hidden rounded-lg mb-4">
+                    <dl class="sm:divide-y sm:divide-gray-200">
+                        <x-molecules.dd-dt label="希望日時1" required=true>
+                            <x-atoms.input name="desired_1_meeting_at" :value="$proposal->desired_1_meeting_at"
+                                required=true type="datetime-local" />
+                        </x-molecules.dd-dt>
+                        <x-molecules.dd-dt label="希望日時2">
+                            <x-atoms.input name="desired_2_meeting_at" :value="$proposal->desired_2_meeting_at"
+                                type="datetime-local" />
+                        </x-molecules.dd-dt>
+                        <x-molecules.dd-dt label="希望日時3">
+                            <x-atoms.input name="desired_3_meeting_at" :value="$proposal->desired_3_meeting_at"
+                                type="datetime-local" />
+                        </x-molecules.dd-dt>
+                    </dl>
+                </div>
                 <div class="flex flex-col items-center">
                     <x-molecules.button-area>
                         <x-molecules.button-submit method="PUT"
                             data-action="{{ route('proposal.request-meeting', $proposal->uuid) }}">
-                            相談する
+                            Web面談を依頼する
                         </x-molecules.button-submit>
                     </x-molecules.button-area>
                 </div>
             @endif
         </form>
-        <x-organisms.page-header title="提案した募集" />
+        <x-organisms.page-header title="この提案の募集" />
         <div class="bg-white shadow overflow-hidden rounded-md">
             <a href="{{ route('project.show', $project->uuid) }}" class="block hover:bg-gray-50">
                 <x-organisms.project :project="$project" :isList=false />
