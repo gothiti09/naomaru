@@ -9,7 +9,7 @@
 
     <label for="{{ $id }}"
         class="ml-3 block text-sm font-medium text-gray-700">
-        <input id="{{ $id }}"name="{{ $name }}" value="{{ $value }}" {{ $checked ? 'checked' : '' }} {{ $attributes }}
+        <input id="{{ $id }}"name="{{ $name }}" value="{{ $value }}" {{ old($name, $checked) ? 'checked' : '' }} {{ $attributes }}
             {{ $disabled ? 'disabled' : '' }} type="checkbox" value="1"
             class="focus:ring-primary-500 h-4 w-4 text-primary-600 border-gray-300 rounded">
         <span>{{ $label }}</span>
