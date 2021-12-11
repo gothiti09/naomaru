@@ -30,7 +30,7 @@ class CreateAuditForAdmin extends Mailable
     {
         return $this
             ->view('mail.create-audit-for-admin')
-            ->subject('【' . config('app.name') . '】【管理者向け】新しい監査依頼が登録されました。')
+            ->subject('【' . config('app.name') . '】【管理者向け】新しい監査登録されました。')
             ->with(['audit' => $this->audit]);
     }
 }

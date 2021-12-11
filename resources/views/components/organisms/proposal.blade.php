@@ -37,6 +37,7 @@
             {{ $proposal->proposal_at?->isoFormat('Y年M月D日(ddd) H:mm') }}
         </p>
         <div>
+            <x-molecules.status-badge color="{{ $proposal->createdBy->auditRank->color }}" text="{{ $proposal->createdBy->auditRank->title }}" />
             <p class="flex items-center text-sm text-gray-500 mt-0">
                 {{ $proposal->company->name }}
             </p>

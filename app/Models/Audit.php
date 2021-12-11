@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Str;
 
@@ -89,24 +90,17 @@ class Audit extends \App\Models\generated\Audit
 
         $point_avg = round(($point_sum / $point_full) * 100);
 
+        $audit_rank = AuditRank::getByPointAvg($point_avg);
         $audit->fill([
             'point_sum' => $point_sum,
             'point_full' => $point_full,
             'point_avg' => $point_avg,
+            'audit_rank_id' => $audit_rank->id,
         ])->save();
 
-        return $audit;
-    }
+        // ユーザーには最新の監査レベルを設定
+        Auth::user()->fill(['audit_rank_id' => $audit_rank->id])->save();
 
-    public function getLankAttribute()
-    {
-        if ($this->point_avg >= 90) {
-            return '認定';
-        } elseif ($this->point_avg >= 70) {
-            return 'ゴールド';
-        } elseif ($this->point_avg >= 50) {
-            return 'シルバー';
-        }
-        return 'ブロンズ';
+        return $audit;
     }
 }

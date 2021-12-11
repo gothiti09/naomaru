@@ -15,13 +15,13 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
-        DB::table('audit_levels')->insert(
+        DB::table('audit_ranks')->insert(
             [
-                ['id' => '1', 'title' => 'ビギナー',],
-                ['id' => '2', 'title' => 'ブロンズ',],
-                ['id' => '3', 'title' => 'シルバー',],
-                ['id' => '4', 'title' => 'ゴールド',],
-                ['id' => '5', 'title' => '認定',],
+                ['id' => '1', 'title' => 'ビギナー', 'color' => 'green'],
+                ['id' => '2', 'title' => 'ブロンズ', 'color' => 'amber'],
+                ['id' => '3', 'title' => 'シルバー', 'color' => 'stone'],
+                ['id' => '4', 'title' => 'ゴールド', 'color' => 'yellow'],
+                ['id' => '5', 'title' => '認定', 'color' => 'gray'],
             ]
         );
 

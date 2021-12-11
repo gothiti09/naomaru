@@ -50,6 +50,7 @@
             {{ $project->open_at?->isoFormat('Y年M月D日(ddd) H:mm') }}
         </p>
         <div>
+            <x-molecules.status-badge color="{{ $project->createdBy->auditRank->color }}" text="{{ $project->createdBy->auditRank->title }}" />
             <p class="flex items-center text-sm text-gray-500 mt-0">
                 {{ $project->open ? $project->company->name : '非公開' }}
             </p>

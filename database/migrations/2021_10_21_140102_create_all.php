@@ -18,7 +18,7 @@ class CreateAll extends Migration
             $table->uuid('uuid')->unique();
             $table->char('prefecture_code', 2)->nullable();
             $table->unsignedBigInteger('company_id');
-            $table->unsignedBigInteger('audit_level_id')->nullable();
+            $table->unsignedBigInteger('audit_rank_id')->default(1);
             $table->string('email');
             $table->string('login_id');
             $table->string('name')->nullable();
@@ -63,15 +63,16 @@ class CreateAll extends Migration
             $this->addCommonColumn($table);
         });
 
-        Schema::create('audit_levels', function (Blueprint $table) {
+        Schema::create('audit_ranks', function (Blueprint $table) {
             $table->id();
             $table->string('title');
+            $table->string('color')->default('primary');
             $this->addCommonColumn($table);
         });
 
         Schema::table('users', function (Blueprint $table) {
             $table->foreign('company_id')->references('id')->on('companies');
-            $table->foreign('audit_level_id')->references('id')->on('audit_levels');
+            $table->foreign('audit_rank_id')->references('id')->on('audit_ranks');
             $table->foreign('prefecture_code')->references('code')->on('prefectures');
         });
 
@@ -159,7 +160,9 @@ class CreateAll extends Migration
             $table->integer('point_sum')->nullable();
             $table->integer('point_full')->nullable();
             $table->integer('point_avg')->nullable();
+            $table->unsignedBigInteger('audit_rank_id')->nullable();
             $this->addCommonColumn($table);
+            $table->foreign('audit_rank_id')->references('id')->on('audit_ranks');
         });
 
         Schema::create('audit_item_group_answers', function (Blueprint $table) {

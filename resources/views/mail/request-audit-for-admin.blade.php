@@ -1,4 +1,4 @@
-新しい監査依頼が登録されました。<br>
+新しい監査代行依頼が登録されました。<br>
 以下のユーザに連絡してください。<br>
 <br>
 企業：{{ $request_audit->createdBy->company->name }}<br>

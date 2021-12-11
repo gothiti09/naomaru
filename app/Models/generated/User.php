@@ -8,7 +8,7 @@ use App\Models\BaseUserModel;
  * @property integer $id
  * @property string $prefecture_code
  * @property integer $company_id
- * @property integer $audit_level_id
+ * @property integer $audit_rank_id
  * @property integer $created_by
  * @property integer $updated_by
  * @property string $uuid
@@ -31,7 +31,7 @@ use App\Models\BaseUserModel;
  * @property string $created_at
  * @property string $updated_at
  * @property Company $company
- * @property AuditLevel $auditLevel
+ * @property AuditRank $auditRank
  * @property Prefecture $prefecture
  * @property UserEmail[] $userEmailsUsers
  * @property RequestAudit[] $requestAuditsUsers
@@ -48,7 +48,7 @@ class User extends BaseUserModel
     /**
      * @var array
      */
-    protected $fillable = ['prefecture_code', 'company_id', 'audit_level_id', 'created_by', 'updated_by', 'uuid', 'email', 'login_id', 'name', 'team_name', 'kana', 'age_range', 'tel', 'sex', 'email_verified_at', 'finish_onboarding_at', 'description', 'url', 'is_buyer', 'password', 'remember_token', 'deleted_at', 'created_at', 'updated_at'];
+    protected $fillable = ['prefecture_code', 'company_id', 'audit_rank_id', 'created_by', 'updated_by', 'uuid', 'email', 'login_id', 'name', 'team_name', 'kana', 'age_range', 'tel', 'sex', 'email_verified_at', 'finish_onboarding_at', 'description', 'url', 'is_buyer', 'password', 'remember_token', 'deleted_at', 'created_at', 'updated_at'];
 
     /**
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
@@ -61,9 +61,9 @@ class User extends BaseUserModel
     /**
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
      */
-    public function auditLevel()
+    public function auditRank()
     {
-        return $this->belongsTo('App\Models\AuditLevel');
+        return $this->belongsTo('App\Models\AuditRank');
     }
 
     /**

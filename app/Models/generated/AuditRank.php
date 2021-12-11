@@ -9,12 +9,14 @@ use App\Models\BaseModel;
  * @property integer $created_by
  * @property integer $updated_by
  * @property string $title
+ * @property string $color
  * @property string $deleted_at
  * @property string $created_at
  * @property string $updated_at
- * @property User[] $usersAuditLevels
+ * @property User[] $usersAuditRanks
+ * @property Audit[] $auditsAuditRanks
  */
-class AuditLevel extends BaseModel
+class AuditRank extends BaseModel
 {
     /**
      * The "type" of the auto-incrementing ID.
@@ -26,13 +28,21 @@ class AuditLevel extends BaseModel
     /**
      * @var array
      */
-    protected $fillable = ['created_by', 'updated_by', 'title', 'deleted_at', 'created_at', 'updated_at'];
+    protected $fillable = ['created_by', 'updated_by', 'title', 'color', 'deleted_at', 'created_at', 'updated_at'];
 
     /**
      * @return \Illuminate\Database\Eloquent\Relations\HasMany
      */
-    public function usersAuditLevels()
+    public function usersAuditRanks()
     {
         return $this->hasMany('App\Models\User');
+    }
+
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function auditsAuditRanks()
+    {
+        return $this->hasMany('App\Models\Audit');
     }
 }
