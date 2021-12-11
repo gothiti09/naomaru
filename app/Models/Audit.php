@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Str;
 
 class Audit extends \App\Models\generated\Audit
@@ -59,12 +60,16 @@ class Audit extends \App\Models\generated\Audit
                 $evidence_name = $answer_file?->getClientOriginalName();
                 $evidence_path = $answer_file?->store('');
                 $audit_item = $audit_items->firstWhere('id', $audit_item_id);
+                // チェックかテキストに入力があればポイントを付与する
+                $point =
+                    (isset($audit_item_answer['answer_check']) && $audit_item_answer['answer_check']) ||
+                    (isset($audit_item_answer['answer_text']) && $audit_item_answer['answer_text']) ? $audit_item->point : 0;
                 $audit_item_group_answer->auditItemAnswers()->create([
                     'title' => $audit_item->title,
                     'checkbox' => $audit_item->checkbox,
                     'text' => $audit_item->text,
                     'evidence' => $audit_item->evidence,
-                    'point' => isset($audit_item_answer['answer_check']) && $audit_item_answer['answer_check'] ? $audit_item->point : 0,
+                    'point' => $point,
                     'answer_text' => $audit_item_answer['answer_text'] ?? null,
                     'answer_check' => $audit_item_answer['answer_check'] ?? null,
                     'evidence_name' => $evidence_name,
@@ -73,7 +78,35 @@ class Audit extends \App\Models\generated\Audit
             }
         }
 
+        $point_sum = DB::table('audit_item_answers')
+            ->join('audit_item_group_answers', 'audit_item_answers.audit_item_group_answer_id', '=', 'audit_item_group_answers.id')
+            ->where('audit_item_group_answers.audit_id', $audit->id)
+            ->sum('point');
+
+        $point_full = DB::table('audit_items')
+            ->join('audit_item_groups', 'audit_items.audit_item_group_id', '=', 'audit_item_groups.id')
+            ->sum('point');
+
+        $point_avg = round(($point_sum / $point_full) * 100);
+
+        $audit->fill([
+            'point_sum' => $point_sum,
+            'point_full' => $point_full,
+            'point_avg' => $point_avg,
+        ])->save();
 
         return $audit;
+    }
+
+    public function getLankAttribute()
+    {
+        if ($this->point_avg >= 90) {
+            return '認定';
+        } elseif ($this->point_avg >= 70) {
+            return 'ゴールド';
+        } elseif ($this->point_avg >= 50) {
+            return 'シルバー';
+        }
+        return 'ブロンズ';
     }
 }

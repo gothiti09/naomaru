@@ -17,7 +17,8 @@ class AuditController extends Controller
      */
     public function index()
     {
-        //
+        $latest_audit = Audit::mine()->latest()->first();
+        return view('pages.audit.index', compact('latest_audit'));
     }
 
     /**
@@ -41,7 +42,7 @@ class AuditController extends Controller
     {
         $audit = Audit::createByRequest($request);
         Mail::to(config('domain.admin_mail'))->send(new CreateAuditForAdmin($audit));
-        return redirect('/')->with('success', '監査を登録しました。<br>内容確認などで事務局から連絡させていただく場合がございます。');
+        return redirect(route('audit.show', $audit->uuid))->with('success', '監査を登録しました。<br>内容確認などで事務局から連絡させていただく場合がございます。');
     }
 
     /**
@@ -52,7 +53,8 @@ class AuditController extends Controller
      */
     public function show(Audit $audit)
     {
-        //
+        $audit->load(['auditItemGroupAnswers', 'auditItemGroupAnswers.auditItemAnswers',]);
+        return view('pages.audit.show', compact('audit'));
     }
 
     /**
@@ -63,8 +65,6 @@ class AuditController extends Controller
      */
     public function edit(Audit $audit)
     {
-        $audit->load(['auditItemGroupAnswers', 'auditItemGroupAnswers.auditItemAnswers',]);
-        return view('pages.audit.edit', compact('audit'));
     }
 
     /**

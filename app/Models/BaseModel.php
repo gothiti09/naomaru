@@ -6,6 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use App\Traits\AuthorObservable;
+use Illuminate\Support\Facades\Auth;
 
 /**
  * @property integer $id
@@ -28,4 +29,9 @@ class BaseModel extends Model
 
     protected $dates = ['created_at', 'updated_at', 'deleted_at'];
 
+    public function scopeMine(\Illuminate\Database\Eloquent\Builder $query)
+    {
+        $table = $query->getModel()->getTable() . '.';
+        return $query->where($table . 'created_by', Auth::id());
+    }
 }

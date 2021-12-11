@@ -156,7 +156,9 @@ class CreateAll extends Migration
         Schema::create('audits', function (Blueprint $table) {
             $table->id();
             $table->uuid('uuid')->unique();
-            $table->date('checked_at')->nullable();
+            $table->integer('point_sum')->nullable();
+            $table->integer('point_full')->nullable();
+            $table->integer('point_avg')->nullable();
             $this->addCommonColumn($table);
         });
 
