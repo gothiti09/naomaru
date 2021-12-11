@@ -12,7 +12,7 @@ EOT;
     <x-molecules.breadcrumbs :links="[]" />
     <x-organisms.page-header title="募集登録" />
     <form action="" name="form" method="POST" class="space-y-4" enctype="multipart/form-data"
-        x-data="{ showButton:false, openBudget: {{ $project->budget_undecided ? 'false' : 'true' }} }">
+        x-data="{ openBudget: {{ $project->budget_undecided ? 'false' : 'true' }} }">
         @csrf
         <div class="bg-white shadow overflow-hidden rounded-lg mb-4">
             <div class="px-4 py-5 sm:px-6">
@@ -104,8 +104,8 @@ EOT;
             </div>
         </div>
         <div class="flex flex-col items-center">
-            <x-atoms.checkbox @click="showButton=!showButton" id="agree" name="agree" label="依頼内容に機密情報が含まれていないことを確認しました。" />
-            <x-molecules.button-area x-show="showButton">
+            <x-atoms.checkbox required id="agree" name="agree" label="依頼内容に機密情報が含まれていないことを確認しました。" />
+            <x-molecules.button-area>
                 <x-molecules.button-submit method="POST" data-action="{{ route('project.store') }}">
                     募集する
                 </x-molecules.button-submit>
