@@ -31,7 +31,7 @@ class AuthenticatedSessionController extends Controller
     {
         // 法人番号とログインIDでログインするためにメールアドレスを取得する処理を追加
         $user = User::getByCorporateNumberAndId($request->corporate_number, $request->login_id);
-        $request->merge(['email' => $user->email]);
+        $request->merge(['email' => $user?->email]);
 
         $request->authenticate();
 
