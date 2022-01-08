@@ -88,12 +88,12 @@ EOT;
                             </div>
                         </div>
                     </x-molecules.dd-dt>
+                    <x-molecules.dd-dt label="提案期限" required=true>
+                        <x-atoms.input name="close_at" :value="$project->close_at" required=true type="date" />
+                    </x-molecules.dd-dt>
                     <x-molecules.dd-dt label="希望納期" required=true>
                         <x-atoms.input name="desired_delivery_at" :value="$project->desired_delivery_at" required=true
                             type="date" />
-                    </x-molecules.dd-dt>
-                    <x-molecules.dd-dt label="提案期限" required=true>
-                        <x-atoms.input name="close_at" :value="$project->close_at" required=true type="date" />
                     </x-molecules.dd-dt>
                     <x-molecules.dd-dt label="納品場所" required=true>
                         <x-atoms.select name="delivery_prefecture_code" :option="$prefectures->pluck('name', 'code')"

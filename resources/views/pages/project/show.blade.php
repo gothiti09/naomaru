@@ -42,11 +42,11 @@ EOT;
                     </x-molecules.dd-dt>
                     <x-molecules.dd-dt label="添付ファイル">
                         <div class="sm:text-sm">
-                        @foreach ($project->projectFiles as $projectFile)
-                            <x-atoms.link href="{{ route('project-file.download', $projectFile->uuid) }}">
-                                {{ $projectFile->name }}
-                            </x-atoms.link>
-                        @endforeach
+                            @foreach ($project->projectFiles as $projectFile)
+                                <x-atoms.link href="{{ route('project-file.download', $projectFile->uuid) }}">
+                                    {{ $projectFile->name }}
+                                </x-atoms.link>
+                            @endforeach
                         </div>
                     </x-molecules.dd-dt>
                 </dl>
@@ -63,11 +63,11 @@ EOT;
                     <x-molecules.dd-dt label="予算">
                         <x-atoms.text>{{ $project->budget }}</x-atoms.text>
                     </x-molecules.dd-dt>
-                    <x-molecules.dd-dt label="希望納期">
-                        <x-atoms.text>{{ $project->desired_delivery_at->format('Y年m月d日') }}</x-atoms.text>
-                    </x-molecules.dd-dt>
                     <x-molecules.dd-dt label="提案期限">
                         <x-atoms.text>{{ $project->close_at->format('Y年m月d日') }}</x-atoms.text>
+                    </x-molecules.dd-dt>
+                    <x-molecules.dd-dt label="希望納期">
+                        <x-atoms.text>{{ $project->desired_delivery_at->format('Y年m月d日') }}</x-atoms.text>
                     </x-molecules.dd-dt>
                     <x-molecules.dd-dt label="納品場所">
                         <x-atoms.text>{{ $project->deliveryPrefecture->name }}</x-atoms.text>
