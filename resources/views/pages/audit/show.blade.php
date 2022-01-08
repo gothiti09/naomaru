@@ -5,8 +5,11 @@
     <x-molecules.icon-description title="監査スコア">
         <x-atoms.svg-document size="xl" viewBox="24" />
         <x-slot name="description">
-            <p>監査スコア<span class="text-3xl text-primary-500">{{$audit->point_avg}}</span>％（スコア合計<span class="text-xl text-primary-500">{{$audit->point_full}}</span>ポイント中、<span class="text-xl text-primary-500">{{$audit->point_sum}}</span>ポイント）　</p>
-            <p>監査ランクは<span class="text-3xl text-primary-500">{{$audit->auditRank->title}}</span>です。
+            <p>監査スコア<span class="text-3xl text-primary-500">{{ $audit->point_avg }}</span>％（スコア合計<span
+                    class="text-xl text-primary-500">{{ $audit->point_full }}</span>ポイント中、<span
+                    class="text-xl text-primary-500">{{ $audit->point_sum }}</span>ポイント）　</p>
+            <p>監査ランクは<span class="text-3xl text-primary-500">{{ $audit->auditRank->title }}</span>です。
+            <div class="flex justify-center"><img src="/image/rank.png" alt="ランク" /></div>
         </x-slot>
     </x-molecules.icon-description>
     @foreach ($audit->auditItemGroupAnswers as $audit_item_group_answer)

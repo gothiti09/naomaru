@@ -13,9 +13,12 @@ EOT;
     <x-organisms.page-header title="監査代行" />
     <form action="" name="form" method="POST" class="space-y-4" enctype="multipart/form-data">
         @csrf
-        <x-molecules.icon-description title="監査代行とは何ですか？"
-            description='お客さまが関連会社・購買先・外部委託先などに対して行う二者監査を、金属加工における受発注プロフェッショナルである弊社がお客さまに代わって実施します。'>
+        <x-molecules.icon-description title="監査スコア">
             <x-atoms.svg-question size="xl" viewBox="24" />
+            <x-slot name="description">
+                <p class="text-sm">お客さまが関連会社・購買先・外部委託先などに対して行う二者監査を、金属加工における受発注プロフェッショナルである弊社がお客さまに代わって実施します。</p>
+                <div class="flex justify-center"><img src="/image/audit.png" alt="ランク" /></div>
+            </x-slot>
         </x-molecules.icon-description>
         <div class="bg-white shadow overflow-hidden rounded-lg mb-4">
             <div class="px-4 py-5 sm:px-6">
@@ -31,7 +34,7 @@ EOT;
                             <div class="space-y-5">
                                 <div class="relative flex items-start">
                                     <x-atoms.radio name="plan"
-                                        :option="['松プラン' => '松プラン', '梅プラン' => '梅プラン', '竹プラン' => '竹プラン']" checked=""
+                                        :option="['梅プラン' => '梅プラン', '竹プラン' => '竹プラン', '松プラン' => '松プラン', ]" checked=""
                                         required=true />
                                 </div>
                         </fieldset>

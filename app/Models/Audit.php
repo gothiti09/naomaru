@@ -90,7 +90,10 @@ class Audit extends \App\Models\generated\Audit
 
         $point_avg = round(($point_sum / $point_full) * 100);
 
-        $audit_rank = AuditRank::getByPointAvg($point_avg);
+        // 監査ランクは内容関係なく自動でブロンズ。内容を確認して手動で変更
+        $audit_rank = AuditRank::find(2);
+        // $audit_rank = AuditRank::getByPointAvg($point_avg);
+
         $audit->fill([
             'point_sum' => $point_sum,
             'point_full' => $point_full,
