@@ -31,6 +31,6 @@ class ReqestMeetingForAdmin extends Mailable
         return $this
             ->view('mail.request-meeting-for-admin')
             ->subject('【' . config('app.name') . '】【管理者向け】新しいWeb面談依頼が登録されました。')
-            ->with(['proposal' => $this->proposal]);
+            ->with(['proposal' => $this->proposal, 'project' => $this->proposal->project]);
     }
 }

@@ -170,13 +170,13 @@ class DatabaseSeeder extends Seeder
         DB::table('companies')->insert(
             [
                 ['name' => '株式会社AAA', 'uuid' => Str::uuid(), 'corporate_number' => '1234567890123'],
+                ['name' => '株式会社BBB', 'uuid' => Str::uuid(), 'corporate_number' => '1234567890124'],
             ]
         );
 
         DB::table('users')->insert(
             [
                 [
-                    'id' => '4',
                     'login_id' => 'test12',
                     'uuid' => Str::uuid(),
                     'company_id' => '1',
@@ -186,6 +186,18 @@ class DatabaseSeeder extends Seeder
                     'email_verified_at' => now(),
                     'kana' => 'ヤマダ　タロウ',
                     'sex' => '1',
+                    'finish_onboarding_at' => now(),
+                ],
+                [
+                    'login_id' => 'test12',
+                    'uuid' => Str::uuid(),
+                    'company_id' => '2',
+                    'name' => '木村　花子',
+                    'email' => 'user2@example.com',
+                    'password' => bcrypt('Test1234'),
+                    'email_verified_at' => now(),
+                    'kana' => 'キムラ　ハナコ',
+                    'sex' => '2',
                     'finish_onboarding_at' => now(),
                 ],
             ]
