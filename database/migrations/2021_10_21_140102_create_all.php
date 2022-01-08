@@ -149,6 +149,7 @@ class CreateAll extends Migration
             $table->integer('point')->nullable();
             $table->boolean('checkbox')->default(false);
             $table->boolean('text')->default(false);
+            $table->string('template')->nullable();
             $table->boolean('evidence')->default(false);
             $this->addCommonColumn($table);
             $table->foreign('audit_item_group_id')->references('id')->on('audit_item_groups');

@@ -27,7 +27,7 @@
                                             @endif
                                             @if ($audit_item->text)
                                                 <x-atoms.textarea name="audit_item_group_answers[{{ $audit_item_group->id }}][audit_item_answers][{{ $audit_item->id }}][answer_text]"
-                                                    :value="$request_audit->description ?? ''" rows=4 />
+                                                    :value="$request_audit->description ?? $audit_item->template" rows=4 />
                                             @endif
                                             @if ($audit_item->evidence)
                                                 <div class="mt-2">

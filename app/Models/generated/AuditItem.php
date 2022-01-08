@@ -13,6 +13,7 @@ use App\Models\BaseModel;
  * @property int $point
  * @property boolean $checkbox
  * @property boolean $text
+ * @property string $template
  * @property boolean $evidence
  * @property string $deleted_at
  * @property string $created_at
@@ -31,7 +32,7 @@ class AuditItem extends BaseModel
     /**
      * @var array
      */
-    protected $fillable = ['audit_item_group_id', 'created_by', 'updated_by', 'title', 'point', 'checkbox', 'text', 'evidence', 'deleted_at', 'created_at', 'updated_at'];
+    protected $fillable = ['audit_item_group_id', 'created_by', 'updated_by', 'title', 'point', 'checkbox', 'text', 'template', 'evidence', 'deleted_at', 'created_at', 'updated_at'];
 
     /**
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
