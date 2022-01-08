@@ -1,7 +1,7 @@
 @props(['project', 'isList' => true])
 <div class="px-4 py-4 sm:px-6 space-y-2">
     <div class="flex items-center justify-between">
-        <p class="text-xl font-bold text-gray-900 truncate">
+        <p class="text-xl font-bold text-primary-500 truncate">
             {{ $project->title }}
         </p>
     </div>

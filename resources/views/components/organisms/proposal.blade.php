@@ -15,7 +15,7 @@
     <div class="ml-2 flex flex-wrap justify-start gap-y-2">
         <div class="flex flex-col items-center sm:w-1/4 w-1/2">
             <x-molecules.label-badge color="gray" text="提案金額" />
-            <p class="text-lg font-medium text-gray-900 truncate">
+            <p class="text-lg font-medium text-primary-500 truncate">
                 {{ $proposal->budget_text }}
             </p>
         </div>
