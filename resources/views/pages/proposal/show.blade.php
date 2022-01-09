@@ -53,6 +53,26 @@ EOT;
                     </dl>
                 </div>
             </div>
+            <div class="bg-white shadow overflow-hidden rounded-lg mb-4">
+                <div class="px-4 py-5 sm:px-6">
+                    <h3 class="text-lg leading-6 font-medium text-gray-900">
+                        会社概要
+                    </h3>
+                </div>
+                <div class="border-t border-gray-200 px-4 py-5 sm:p-0">
+                    <dl class="sm:divide-y sm:divide-gray-200">
+                        <x-molecules.dd-dt label="会社名" required=true>
+                            <x-atoms.text>{{ $proposal->company->name }}</x-atoms.text>
+                        </x-molecules.dd-dt>
+                        <x-molecules.dd-dt label="所在地" required=true>
+                            <x-atoms.text>{{ $proposal->user->prefecture?->name }}</x-atoms.text>
+                        </x-molecules.dd-dt>
+                        <x-molecules.dd-dt label="自己紹介" required=true>
+                            <x-atoms.text>{{ $proposal->user->description }}</x-atoms.text>
+                        </x-molecules.dd-dt>
+                    </dl>
+                </div>
+            </div>
             @if (!$proposal->request_meeting_at)
                 <div class="bg-white shadow overflow-hidden rounded-lg mb-4">
                     <dl class="sm:divide-y sm:divide-gray-200">
