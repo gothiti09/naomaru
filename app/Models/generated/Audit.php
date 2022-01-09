@@ -6,6 +6,7 @@ use App\Models\BaseModel;
 
 /**
  * @property integer $id
+ * @property integer $user_id
  * @property integer $audit_rank_id
  * @property integer $created_by
  * @property integer $updated_by
@@ -16,6 +17,7 @@ use App\Models\BaseModel;
  * @property string $deleted_at
  * @property string $created_at
  * @property string $updated_at
+ * @property User $user
  * @property AuditRank $auditRank
  * @property AuditItemGroupAnswer[] $auditItemGroupAnswersAudits
  */
@@ -31,7 +33,15 @@ class Audit extends BaseModel
     /**
      * @var array
      */
-    protected $fillable = ['audit_rank_id', 'created_by', 'updated_by', 'uuid', 'point_sum', 'point_full', 'point_avg', 'deleted_at', 'created_at', 'updated_at'];
+    protected $fillable = ['user_id', 'audit_rank_id', 'created_by', 'updated_by', 'uuid', 'point_sum', 'point_full', 'point_avg', 'deleted_at', 'created_at', 'updated_at'];
+
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
+    public function user()
+    {
+        return $this->belongsTo('App\Models\User');
+    }
 
     /**
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo

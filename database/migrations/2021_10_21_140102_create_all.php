@@ -86,6 +86,7 @@ class CreateAll extends Migration
             $table->id();
             $table->uuid('uuid')->unique();
             $table->unsignedBigInteger('company_id');
+            $table->unsignedBigInteger('user_id');
             $table->char('delivery_prefecture_code', 2);
             $table->string('title');
             $table->text('description');
@@ -101,6 +102,7 @@ class CreateAll extends Migration
             $table->boolean('open')->default(true);
             $this->addCommonColumn($table);
             $table->foreign('company_id')->references('id')->on('companies');
+            $table->foreign('user_id')->references('id')->on('users');
             $table->foreign('delivery_prefecture_code')->references('code')->on('prefectures');
         });
 
@@ -109,6 +111,7 @@ class CreateAll extends Migration
             $table->uuid('uuid')->unique();
             $table->unsignedBigInteger('project_id');
             $table->unsignedBigInteger('company_id');
+            $table->unsignedBigInteger('user_id');
             $table->text('description');
             $table->dateTime('proposal_at');
             $table->dateTime('delivery_at');
@@ -122,6 +125,7 @@ class CreateAll extends Migration
             $this->addCommonColumn($table);
             $table->foreign('project_id')->references('id')->on('projects');
             $table->foreign('company_id')->references('id')->on('companies');
+            $table->foreign('user_id')->references('id')->on('users');
         });
 
         Schema::create('stages', function (Blueprint $table) {
@@ -158,11 +162,13 @@ class CreateAll extends Migration
         Schema::create('audits', function (Blueprint $table) {
             $table->id();
             $table->uuid('uuid')->unique();
+            $table->unsignedBigInteger('user_id');
             $table->integer('point_sum')->nullable();
             $table->integer('point_full')->nullable();
             $table->integer('point_avg')->nullable();
             $table->unsignedBigInteger('audit_rank_id')->nullable();
             $this->addCommonColumn($table);
+            $table->foreign('user_id')->references('id')->on('users');
             $table->foreign('audit_rank_id')->references('id')->on('audit_ranks');
         });
 

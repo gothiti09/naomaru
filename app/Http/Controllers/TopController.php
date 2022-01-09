@@ -20,6 +20,9 @@ class TopController extends Controller
         }
         $projects = Project::mine();
         $proposals = Proposal::mine();
+        if (!Auth::user()->audits->count()) {
+            session()->flash('success', '監査登録が完了していません。');
+        }
         return view('pages.top.index', compact('projects', 'proposals'));
     }
 }

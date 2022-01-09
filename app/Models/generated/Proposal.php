@@ -8,6 +8,7 @@ use App\Models\BaseModel;
  * @property integer $id
  * @property integer $project_id
  * @property integer $company_id
+ * @property integer $user_id
  * @property integer $created_by
  * @property integer $updated_by
  * @property string $uuid
@@ -26,6 +27,7 @@ use App\Models\BaseModel;
  * @property string $updated_at
  * @property Project $project
  * @property Company $company
+ * @property User $user
  * @property ProposalFile[] $proposalFilesProposals
  */
 class Proposal extends BaseModel
@@ -40,7 +42,7 @@ class Proposal extends BaseModel
     /**
      * @var array
      */
-    protected $fillable = ['project_id', 'company_id', 'created_by', 'updated_by', 'uuid', 'description', 'proposal_at', 'delivery_at', 'request_meeting_at', 'desired_1_meeting_at', 'desired_2_meeting_at', 'desired_3_meeting_at', 'cancel_at', 'cancel_reason', 'budget', 'deleted_at', 'created_at', 'updated_at'];
+    protected $fillable = ['project_id', 'company_id', 'user_id', 'created_by', 'updated_by', 'uuid', 'description', 'proposal_at', 'delivery_at', 'request_meeting_at', 'desired_1_meeting_at', 'desired_2_meeting_at', 'desired_3_meeting_at', 'cancel_at', 'cancel_reason', 'budget', 'deleted_at', 'created_at', 'updated_at'];
 
     /**
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
@@ -56,6 +58,14 @@ class Proposal extends BaseModel
     public function company()
     {
         return $this->belongsTo('App\Models\Company');
+    }
+
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
+    public function user()
+    {
+        return $this->belongsTo('App\Models\User');
     }
 
     /**

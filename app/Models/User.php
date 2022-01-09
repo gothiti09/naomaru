@@ -32,4 +32,13 @@ class User extends \App\Models\generated\User
         return $this->hasMany('App\Models\UserEmail');
     }
 
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function audits()
+    {
+        return $this->hasMany('App\Models\Audit');
+    }
+
+
 }
