@@ -24,21 +24,12 @@ class AuthorObserver
     {
         if (\Auth::check()) {
             $model->updated_by = \Auth::user()->id;
-            if (in_array('user_id', $model->getFillable())) {
-                $model->user_id = \Auth::user()->id;
-            }
         }
     }
     public function saving(Model $model)
     {
         if (\Auth::check()) {
             $model->updated_by = \Auth::user()->id;
-            if (in_array('company_id', $model->getFillable())) {
-                $model->company_id = \Auth::user()->company_id;
-            }
-            if (in_array('user_id', $model->getFillable())) {
-                $model->user_id = \Auth::user()->id;
-            }
         }
     }
     public function deleting(Model $model)
