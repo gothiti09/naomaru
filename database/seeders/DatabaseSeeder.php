@@ -24,6 +24,7 @@ class DatabaseSeeder extends Seeder
                 ['id' => '5', 'title' => '認定', 'color' => 'gray'],
             ]
         );
+        DB::statement("SELECT setval('audit_ranks_id_seq', (SELECT MAX(id) FROM audit_ranks));");
 
         DB::table('stages')->insert(
             [
@@ -36,6 +37,7 @@ class DatabaseSeeder extends Seeder
                 ['id' => '7', 'title' => 'その他',],
             ]
         );
+        DB::statement("SELECT setval('stages_id_seq', (SELECT MAX(id) FROM stages));");
 
         DB::table('methods')->insert(
             [
@@ -49,6 +51,7 @@ class DatabaseSeeder extends Seeder
                 ['id' => '8', 'title' => 'その他',],
             ]
         );
+        DB::statement("SELECT setval('methods_id_seq', (SELECT MAX(id) FROM methods));");
 
         DB::table('audit_item_groups')->insert(
             [
@@ -65,6 +68,8 @@ class DatabaseSeeder extends Seeder
                 ['id' => '11', 'title' => 'アンケート'],
             ]
         );
+        DB::statement("SELECT setval('audit_item_groups_id_seq', (SELECT MAX(id) FROM audit_item_groups));");
+
         DB::table('audit_items')->insert(
             [
                 ['id' => '1', 'audit_item_group_id' => '1', 'point' => 3, 'checkbox' => true, 'text' => false, 'evidence' => false, 'template' => '', 'title' => '機密事項については入力および添付しないこと約束する'],
@@ -116,6 +121,7 @@ class DatabaseSeeder extends Seeder
                 ['id' => '47', 'audit_item_group_id' => '11', 'point' => 0, 'checkbox' => true, 'text' => false, 'evidence' => false, 'template' => '', 'title' => '自社の品質管理について課題を抱えている'],
             ]
         );
+        DB::statement("SELECT setval('audit_items_id_seq', (SELECT MAX(id) FROM audit_items));");
 
         \DB::table('prefectures')->insert([
             ['code' => '01', 'region_id' => 1, 'name' => '北海道'],
@@ -169,11 +175,12 @@ class DatabaseSeeder extends Seeder
 
         DB::table('companies')->insert(
             [
-                ['name' => '株式会社ミラリンク', 'uuid' => Str::uuid(), 'corporate_number' => '9999999999999'],
-                ['name' => '株式会社AAA', 'uuid' => Str::uuid(), 'corporate_number' => '1234567890123'],
-                ['name' => '株式会社BBB', 'uuid' => Str::uuid(), 'corporate_number' => '1234567890124'],
+                ['id' => 1, 'name' => '株式会社ミラリンク', 'uuid' => Str::uuid(), 'corporate_number' => '9999999999999'],
+                ['id' => 2, 'name' => '株式会社AAA', 'uuid' => Str::uuid(), 'corporate_number' => '1234567890123'],
+                ['id' => 3, 'name' => '株式会社BBB', 'uuid' => Str::uuid(), 'corporate_number' => '1234567890124'],
             ]
         );
+        DB::statement("SELECT setval('companies_id_seq', (SELECT MAX(id) FROM companies));");
 
         DB::table('users')->insert(
             [
@@ -206,7 +213,7 @@ class DatabaseSeeder extends Seeder
                 [
                     'login_id' => 'test12',
                     'uuid' => Str::uuid(),
-                    'company_id' => '2',
+                    'company_id' => '3',
                     'name' => '木村　花子',
                     'email' => 'user2@example.com',
                     'password' => bcrypt('Test1234'),
@@ -218,5 +225,6 @@ class DatabaseSeeder extends Seeder
                 ],
             ]
         );
+        DB::statement("SELECT setval('users_id_seq', (SELECT MAX(id) FROM users));");
     }
 }

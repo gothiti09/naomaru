@@ -34,9 +34,9 @@ use App\Models\BaseUserModel;
  * @property Company $company
  * @property AuditRank $auditRank
  * @property Prefecture $prefecture
- * @property UserEmail[] $userEmailsUsers
  * @property Project[] $projectsUsers
  * @property Proposal[] $proposalsUsers
+ * @property UserEmail[] $userEmailsUsers
  * @property Audit[] $auditsUsers
  * @property RequestAudit[] $requestAuditsUsers
  */
@@ -81,14 +81,6 @@ class User extends BaseUserModel
     /**
      * @return \Illuminate\Database\Eloquent\Relations\HasMany
      */
-    public function userEmailsUsers()
-    {
-        return $this->hasMany('App\Models\UserEmail');
-    }
-
-    /**
-     * @return \Illuminate\Database\Eloquent\Relations\HasMany
-     */
     public function projectsUsers()
     {
         return $this->hasMany('App\Models\Project');
@@ -100,6 +92,14 @@ class User extends BaseUserModel
     public function proposalsUsers()
     {
         return $this->hasMany('App\Models\Proposal');
+    }
+
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function userEmailsUsers()
+    {
+        return $this->hasMany('App\Models\UserEmail');
     }
 
     /**

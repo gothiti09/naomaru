@@ -75,15 +75,17 @@ EOT;
                 </dl>
             </div>
         </div>
-        <div class="flex flex-col items-center">
-            <x-molecules.button-area>
-                <x-molecules.button-submit method="GET"
-                    data-action="{{ route('proposal.create', ['project_uuid' => $project->uuid]) }}">
-                    提案する
-                </x-molecules.button-submit>
-            </x-molecules.button-area>
-        </div>
-        @if ($project->proposals?->count())
+        @if ($project->created_by != Auth::id())
+            <div class="flex flex-col items-center">
+                <x-molecules.button-area>
+                    <x-molecules.button-submit method="GET"
+                        data-action="{{ route('proposal.create', ['project_uuid' => $project->uuid]) }}">
+                        提案する
+                    </x-molecules.button-submit>
+                </x-molecules.button-area>
+            </div>
+        @endif
+        @if ($project->proposals?->count() && ($project->created_by == Auth::id() || Auth::user()->is_admin))
             <div class="bg-white shadow overflow-hidden rounded-md">
                 <ul role="list" class="divide-y divide-gray-200">
                     @foreach ($project->proposals as $proposal)

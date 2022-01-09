@@ -84,7 +84,7 @@ EOT;
                     </dl>
                 </div>
             </div>
-            @if (!$proposal->request_meeting_at)
+            @if (!$proposal->request_meeting_at &&($proposal->project->created_by == Auth::id() || Auth::user()->is_admin))
                 <div class="bg-white shadow overflow-hidden rounded-lg mb-4">
                     <dl class="sm:divide-y sm:divide-gray-200">
                         <x-molecules.dd-dt label="希望日時1" required=true>
