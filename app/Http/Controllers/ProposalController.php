@@ -57,8 +57,8 @@ class ProposalController extends Controller
      */
     public function show(Proposal $proposal)
     {
-        $project = $proposal->project;
-        return view('pages.proposal.show', compact('project', 'proposal'));
+        $proposal->load(['project', 'createdBy.latestAudit',]);
+        return view('pages.proposal.show', compact('proposal'));
     }
 
     /**

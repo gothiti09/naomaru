@@ -14,7 +14,7 @@ EOT;
         <x-organisms.page-header title="提案" />
         <form action="" name="form" method="POST" class="space-y-4">
             @csrf
-            <input type="hidden" name="project_uuid" value="{{ $project->uuid }}" />
+            <input type="hidden" name="project_uuid" value="{{ $proposal->project->uuid }}" />
             <div class="bg-white shadow overflow-hidden rounded-md">
                 <x-organisms.proposal :proposal="$proposal" />
             </div>
@@ -70,6 +70,17 @@ EOT;
                         <x-molecules.dd-dt label="自己紹介" required=true>
                             <x-atoms.text>{{ $proposal->user->description }}</x-atoms.text>
                         </x-molecules.dd-dt>
+                        <x-molecules.dd-dt label="監査結果" required=true>
+                            <x-atoms.text>
+                                @if ($proposal->createdBy->latestAudit)
+                                    <x-atoms.link href="{{ route('audit.show', $proposal->createdBy->latestAudit) }}">
+                                        最新の監査結果
+                                    </x-atoms.link>
+                                @else
+                                    監査実績なし
+                                @endif
+                            </x-atoms.text>
+                        </x-molecules.dd-dt>
                     </dl>
                 </div>
             </div>
@@ -102,8 +113,8 @@ EOT;
         </form>
         <x-organisms.page-header title="この提案の募集" />
         <div class="bg-white shadow overflow-hidden rounded-md">
-            <a href="{{ route('project.show', $project->uuid) }}" class="block hover:bg-gray-50">
-                <x-organisms.project :project="$project" :isList=false />
+            <a href="{{ route('project.show', $proposal->project->uuid) }}" class="block hover:bg-gray-50">
+                <x-organisms.project :project="$proposal->project" :isList=false />
             </a>
         </div>
     </div>

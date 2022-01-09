@@ -40,5 +40,13 @@ class User extends \App\Models\generated\User
         return $this->hasMany('App\Models\Audit');
     }
 
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function latestAudit()
+    {
+        return $this->hasOne('App\Models\Audit')->orderBy('id', 'desc');
+    }
+
 
 }

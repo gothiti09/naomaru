@@ -30,7 +30,7 @@
                                                     {{ $audit_item_answer->answer_check ? 'はい' : 'いいえ' }}
                                                 </x-atoms.text>
                                             @endif
-                                            @if ($audit_item_answer->evidence_name)
+                                            @if ($audit_item_answer->evidence_name && (Auth::user()->is_admin || Auth::id() == $audit->user_id))
                                                 <x-atoms.link
                                                     href="{{ route('audit.download', $audit_item_answer->uuid) }}">
                                                     {{ $audit_item_answer->evidence_name }}
