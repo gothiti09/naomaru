@@ -19,6 +19,7 @@ class CreateAll extends Migration
             $table->char('prefecture_code', 2)->nullable();
             $table->unsignedBigInteger('company_id');
             $table->unsignedBigInteger('audit_rank_id')->default(1);
+            $table->boolean('is_admin')->default(false);
             $table->string('email');
             $table->string('login_id');
             $table->string('name')->nullable();

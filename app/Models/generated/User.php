@@ -12,6 +12,7 @@ use App\Models\BaseUserModel;
  * @property integer $created_by
  * @property integer $updated_by
  * @property string $uuid
+ * @property boolean $is_admin
  * @property string $email
  * @property string $login_id
  * @property string $name
@@ -51,7 +52,7 @@ class User extends BaseUserModel
     /**
      * @var array
      */
-    protected $fillable = ['prefecture_code', 'company_id', 'audit_rank_id', 'created_by', 'updated_by', 'uuid', 'email', 'login_id', 'name', 'team_name', 'kana', 'age_range', 'tel', 'sex', 'email_verified_at', 'finish_onboarding_at', 'description', 'url', 'is_buyer', 'password', 'remember_token', 'deleted_at', 'created_at', 'updated_at'];
+    protected $fillable = ['prefecture_code', 'company_id', 'audit_rank_id', 'created_by', 'updated_by', 'uuid', 'is_admin', 'email', 'login_id', 'name', 'team_name', 'kana', 'age_range', 'tel', 'sex', 'email_verified_at', 'finish_onboarding_at', 'description', 'url', 'is_buyer', 'password', 'remember_token', 'deleted_at', 'created_at', 'updated_at'];
 
     /**
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo

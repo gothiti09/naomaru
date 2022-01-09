@@ -169,6 +169,7 @@ class DatabaseSeeder extends Seeder
 
         DB::table('companies')->insert(
             [
+                ['name' => '株式会社ミラリンク', 'uuid' => Str::uuid(), 'corporate_number' => '9999999999999'],
                 ['name' => '株式会社AAA', 'uuid' => Str::uuid(), 'corporate_number' => '1234567890123'],
                 ['name' => '株式会社BBB', 'uuid' => Str::uuid(), 'corporate_number' => '1234567890124'],
             ]
@@ -180,12 +181,26 @@ class DatabaseSeeder extends Seeder
                     'login_id' => 'test12',
                     'uuid' => Str::uuid(),
                     'company_id' => '1',
+                    'name' => '佐取　直拓',
+                    'email' => 'gothiti09@gmail.com',
+                    'password' => bcrypt('Test1234'),
+                    'email_verified_at' => now(),
+                    'kana' => 'サトウ　ナオヒロ',
+                    'sex' => '1',
+                    'is_admin' => true,
+                    'finish_onboarding_at' => now(),
+                ],
+                [
+                    'login_id' => 'test12',
+                    'uuid' => Str::uuid(),
+                    'company_id' => '2',
                     'name' => '山田　太郎',
                     'email' => 'user@example.com',
                     'password' => bcrypt('Test1234'),
                     'email_verified_at' => now(),
                     'kana' => 'ヤマダ　タロウ',
                     'sex' => '1',
+                    'is_admin' => false,
                     'finish_onboarding_at' => now(),
                 ],
                 [
@@ -198,6 +213,7 @@ class DatabaseSeeder extends Seeder
                     'email_verified_at' => now(),
                     'kana' => 'キムラ　ハナコ',
                     'sex' => '2',
+                    'is_admin' => false,
                     'finish_onboarding_at' => now(),
                 ],
             ]
