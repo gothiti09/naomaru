@@ -8,7 +8,7 @@
             <ul role="list" class="divide-y divide-gray-200">
                 @foreach ($projects as $project)
                     <li>
-                        <a href="{{ route('project.show', $project->uuid) }}" class="block hover:bg-gray-50">
+                        <a href="{{ route('project.show', $project->uuid) }}" class="block hover:bg-primary-50">
                             <x-organisms.project :project="$project" />
                         </a>
                     </li>
