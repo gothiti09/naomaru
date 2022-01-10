@@ -12,6 +12,27 @@
             <div class="flex justify-center"><img src="/image/rank.png" alt="ランク" /></div>
         </x-slot>
     </x-molecules.icon-description>
+
+    <div class="bg-white shadow overflow-hidden rounded-lg mb-4">
+        <div class="px-4 py-5 sm:px-6">
+            <h3 class="text-lg leading-6 font-medium text-gray-900">
+                会社概要
+            </h3>
+        </div>
+        <div class="border-t border-gray-200 px-4 py-5 sm:p-0">
+            <dl class="sm:divide-y sm:divide-gray-200">
+                <x-molecules.dd-dt label="会社名">
+                    <x-atoms.text>{{ $audit->user->company->name }}</x-atoms.text>
+                </x-molecules.dd-dt>
+                <x-molecules.dd-dt label="所在地">
+                    <x-atoms.text>{{ $audit->user->prefecture?->name }}</x-atoms.text>
+                </x-molecules.dd-dt>
+                <x-molecules.dd-dt label="自己紹介">
+                    <x-atoms.text>{{ $audit->user->description }}</x-atoms.text>
+                </x-molecules.dd-dt>
+            </dl>
+        </div>
+    </div>
     @foreach ($audit->auditItemGroupAnswers as $audit_item_group_answer)
         <div class="bg-white shadow overflow-hidden rounded-lg mb-4">
             <div class="px-4 py-5 sm:px-6">
