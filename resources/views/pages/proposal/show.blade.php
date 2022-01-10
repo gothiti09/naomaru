@@ -61,16 +61,16 @@ EOT;
                 </div>
                 <div class="border-t border-gray-200 px-4 py-5 sm:p-0">
                     <dl class="sm:divide-y sm:divide-gray-200">
-                        <x-molecules.dd-dt label="会社名" required=true>
+                        <x-molecules.dd-dt label="会社名">
                             <x-atoms.text>{{ $proposal->company->name }}</x-atoms.text>
                         </x-molecules.dd-dt>
-                        <x-molecules.dd-dt label="所在地" required=true>
+                        <x-molecules.dd-dt label="所在地">
                             <x-atoms.text>{{ $proposal->user->prefecture?->name }}</x-atoms.text>
                         </x-molecules.dd-dt>
-                        <x-molecules.dd-dt label="自己紹介" required=true>
+                        <x-molecules.dd-dt label="自己紹介">
                             <x-atoms.text>{{ $proposal->user->description }}</x-atoms.text>
                         </x-molecules.dd-dt>
-                        <x-molecules.dd-dt label="監査結果" required=true>
+                        <x-molecules.dd-dt label="監査結果">
                             <x-atoms.text>
                                 @if ($proposal->createdBy->latestAudit)
                                     <x-atoms.link href="{{ route('audit.show', $proposal->createdBy->latestAudit) }}">

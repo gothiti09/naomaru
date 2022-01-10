@@ -42,8 +42,8 @@
                         <x-atoms.input name="password_confirmation" type="password" />
                         <p class="text-gray-500 text-xs">確認のためパスワードを再入力してください。</p>
                     </x-molecules.dd-dt>
-                    <x-molecules.dd-dt label="部署名・チーム名" required=true>
-                        <x-atoms.input name="team_name" :value="$user->team_name" required=true />
+                    <x-molecules.dd-dt label="部署名・チーム名">
+                        <x-atoms.input name="team_name" :value="$user->team_name" />
                     </x-molecules.dd-dt>
                     <x-molecules.dd-dt label="所在地" required=true>
                         <x-atoms.select name="prefecture_code" :option="$prefectures->pluck('name', 'code')"
@@ -93,6 +93,7 @@
                 <h3 class="text-lg leading-6 font-medium text-gray-900">
                     通知先メールアドレス
                 </h3>
+                <span class="text-xs text-gray-500">めたまっち事務局からの通知を受け取るメールアドレスを記入して下さい。</span>
             </div>
             <div class="border-t border-gray-200 px-4 py-5 sm:p-0">
                 <dl class="sm:divide-y sm:divide-gray-200">
